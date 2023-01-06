@@ -22,7 +22,7 @@ const Sidebar = () => {
         <span>GO-GETTER</span>
       </div>
       <ul className={style.sidebar__nav}>
-        <li className={style["nav__nav-item"]}>
+        <li className={`${style["nav__nav-item"]} ${style.active}`}>
           <span className={style["nav-link"]}>
             {faIcons.day}
             Today
@@ -40,7 +40,7 @@ const Sidebar = () => {
             Next 7 Days
           </span>
         </li>
-        <li className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style.active}`}>
+        <li className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style["active-list"]}`}>
           {faIcons.chevronDown}
           Lists
           <ul className={style["sub-list"]}>
