@@ -40,7 +40,7 @@ const Sidebar = () => {
             Next 7 Days
           </span>
         </li>
-        <li className={`${style["nav__nav-item"]} ${style["task-lists"]}`}>
+        <li className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style.active}`}>
           {faIcons.chevronDown}
           Lists
           <ul className={style["sub-list"]}>

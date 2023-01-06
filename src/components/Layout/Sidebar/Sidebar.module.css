@@ -1,7 +1,57 @@
 .sidebar {
   background-color: #FBFBFB;
   border-right: solid 1px #E2E2E2;
-  width: 211px;
+  max-width: 250px;
   height: 100vh;
+}
+
+.sidebar__logo-container {
+  width: 100%;
+  text-align: center;
+  padding-top: 32px;
+  margin-bottom: 36px;
+}
+
+.sidebar__logo-container span{
+  display: inline-block;
+  font-size: 3.2em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.sidebar__nav {
+  margin: 0 10px;
+}
+
+.sidebar__nav .nav__nav-item {
+  font-size: 1.6em;
+  color: var(--primary-text-color);
+  padding: 4px 23px;
+  margin: 3.5px;
+}
+
+.nav-link .nav-icon {
+  padding-right: 9px;
+}
+
+.task-lists {
+  margin-top: 1em !important;
+  padding: 4px 15px !important;
+}
+
+.task-lists .drop-icon {
+  color: var(--secondary-text-color);
+  padding-right: 10px;
+  font-size: .8em !important;
+}
+
+.task-lists.active .sub-list {
+  /* display: none; */
+  margin-left: 23px;
+}
+
+.sub-list .sub-list-item {
+  padding: 4px 0;
+  margin: 3.5px;
 }
 
