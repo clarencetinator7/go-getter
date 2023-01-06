@@ -5,34 +5,34 @@ import style from './Sidebar.module.css'
 const Sidebar = () => {
 
   return(
-    <nav className="sidebar">
-      <div className="sidebar__logo-container">
+    <nav className={style.sidebar}>
+      <div className={style["sidebar__logo-container"]}>
         <span>GO-GETTER</span>
       </div>
-      <ul className="sidebar__nav">
-        <li className="nav__nav-item">
-          <a className="nav-link">
+      <ul className={style.sidebar__nav}>
+        <li className={style["nav__nav-item"]}>
+          <span className={style["nav-link"]}>
           {/* INSERT ICON HERE */}
             Today
-          </a>
+          </span>
         </li>
-        <li className="nav__nav-item">
-          <a className="nav-link">
+        <li className={style["nav__nav-item"]}>
+          <span className={style["nav-link"]}>
           {/* INSERT ICON HERE */}
             Inbox
-          </a>
+          </span>
         </li>
-        <li className="nav__nav-item">
-          <a className="nav-link">
+        <li className={style["nav__nav-item"]}>
+          <span className={style["nav-link"]}>
           {/* INSERT ICON HERE */}
             Next 7 Days
-          </a>
+          </span>
         </li>
-        <li className="nav__nav-item task-lists">
+        <li className={`${style["nav__nav-item"]} ${style["task-lists"]}`}>
           {/* INSERT ICON HERE */}
           Lists
-          <ul className="sub-list">
-            <li className="sub-list-item">
+          <ul className={style["sub-list"]}>
+            <li className={style["sub-list-item"]}>
               # Chores
             </li>
           </ul>
