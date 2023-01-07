@@ -20,6 +20,16 @@ const TaskForm = props => {
   const onSubmitHandler = e => {
     e.preventDefault();
 
+    if (enteredTask.trim().length === 0) {
+      console.log("PLEASE ENTER A TASK");
+      return;
+      /* 
+        TODO: 
+        ADD EMPTY INPUT WARNING.
+      */
+    }
+    
+
     const dueDate = enteredDate ? new Date(enteredDate).toLocaleDateString("en-us", {
       month: "short",
       day: "numeric",
@@ -43,7 +53,7 @@ const TaskForm = props => {
         <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder='➕ Add new task' />
       </div>
       <div className={`${style['input-wrapper']} ${style['date-wrapper']}`}>
-        <input type='date' min={today} value={enteredDate} onChange={onEnterDateHandler}/>
+        <input type='date' value={enteredDate} onChange={onEnterDateHandler}/>
       </div>
       <button type='submit' hidden/>
     </form>
