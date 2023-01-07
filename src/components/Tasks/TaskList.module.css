@@ -8,7 +8,6 @@
   justify-content: space-between;
   align-items: center;
   margin: 1em 0;
-  font-size: 1.6em;
   height: 50px;
   border-bottom: solid 1px #eeeeee;
 }
@@ -20,4 +19,14 @@
   position: relative;
   vertical-align: middle;
   border: solid 2px var(--primary-text-color);
+}
+
+.task-item__wrapper label {
+  font-size: 1.7em;
+  color: var(--primary-text-color);
+}
+
+.task-item__wrapper.task-due__wrapper {
+  font-size: 1.6em;
+  color: var(--secondary-text-color);
 }

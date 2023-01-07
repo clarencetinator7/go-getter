@@ -7,30 +7,35 @@ import style from './TaskPanel.module.css';
 const INITIAL_TASKS = [
   {
     id: 1,
-    taskName: "Buy groceries",
-    due: "2023-01-06"
+    task: "Buy groceries",
+    due: "2023-01-06",
+    isDone: false
   },
   {
     id: 2,
-    taskName: "Finish project proposal",
-    due: "2023-01-07"
+    task: "Finish project proposal",
+    due: "2023-01-07",
+    isDone: true
   },
   {
     id: 3,
-    taskName: "Attend yoga class",
-    due: "2023-01-08"
+    task: "Attend yoga class",
+    due: "2023-01-08",
+    isDone: false
   },
   {
     id: 4,
-    taskName: "Call dentist for appointment",
-    due: "2023-01-09"
+    task: "Call dentist for appointment",
+    due: "2023-01-09",
+    isDone: false
   },
   {
     id: 5,
-    taskName: "Submit expense report",
-    due: "2023-01-10"
+    task: "Submit expense report",
+    due: "2023-01-10",
+    isDone: true
   }
-]
+];
 
 const TaskPanel = () => {
   return (
