@@ -6,12 +6,12 @@ const TaskList = props => {
 
   const taskItems = props.taskList.map((task) => {
     return (
-      <li key={task.id} className="task-item">
-        <div className="task-item__wrapper">
+      <li key={task.id} className={style['task-item']}>
+        <div className={style["task-item__wrapper"]}>
           <input type="checkbox" name={task.id} id={task.id} />
           <label htmlFor={task.id}>{task.taskName}</label>
         </div>
-        <div className="task-item__wrapper">
+        <div className={style["task-item__wrapper"]}>
           <span>{task.due}</span>
         </div>
       </li>
@@ -19,8 +19,8 @@ const TaskList = props => {
   });  
 
   return (
-    <div className='task-list__container'>
-      <ul className='task-list'>
+    <div className={style['task-list__container']}>
+      <ul className={style['task-list']}>
         {taskItems}
       </ul>
     </div>
