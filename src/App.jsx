@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import TaskPanel from './components/Layout/Main Panel/TaskPanel';
 import Sidebar from './components/Layout/Sidebar/Sidebar';
 
 function App() {
   return (
-    <React.Fragment>
+    <div className='parent-container'>
       <Sidebar />
-    </React.Fragment>
+      <TaskPanel />
+    </div>
   );
 }
 
