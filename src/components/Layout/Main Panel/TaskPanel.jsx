@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
 
@@ -38,14 +38,23 @@ const INITIAL_TASKS = [
 ];
 
 const TaskPanel = () => {
+  
+  const [taskList, addNewTask] = useState(INITIAL_TASKS);
+
+  const addTaskHandler = newTask => {
+    addNewTask(prevTask => {
+      return [...prevTask, newTask]
+    });
+  };
+
   return (
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
         <div className={style["main-content__header"]}>
           <span className="content-title">TODAY:</span>
         </div>
-        <TaskForm />
-        <TaskList taskList={INITIAL_TASKS}/>
+        <TaskForm onSubmitTask={addTaskHandler} />
+        <TaskList taskList={taskList}/>
       </div>
     </main>
   );
