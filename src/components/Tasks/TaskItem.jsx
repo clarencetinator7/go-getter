@@ -5,6 +5,11 @@ import style from './TaskItem.module.css';
 
 const TaskItem = props => {
 
+  let formattedDue = moment(props.due).isValid()
+    ? moment(props.due).format("D MMM")
+    : "";
+  
+
   return (
     <li className={style["task-item"]}>
       <div className={style["task-item__wrapper"]}>
@@ -14,7 +19,7 @@ const TaskItem = props => {
       <div
         className={`${style["task-item__wrapper"]} ${style["task-due__wrapper"]}`}
       >
-        <span>{moment(props.due).format("D MMM")}</span>
+        <span>{formattedDue}</span>
       </div>
     </li>
   );
