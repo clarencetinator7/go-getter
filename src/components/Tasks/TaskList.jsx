@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import React from 'react';
 
 import style from './TaskList.module.css';
@@ -18,7 +19,7 @@ const TaskList = props => {
           <div
             className={`${style["task-item__wrapper"]} ${style["task-due__wrapper"]}`}
           >
-            <span>{item.due}</span>
+            <span>{moment(item.due).format('D MMM')}</span>
           </div>
         </li>
       );

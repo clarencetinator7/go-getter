@@ -30,15 +30,15 @@ const TaskForm = props => {
     }
     
 
-    const dueDate = enteredDate ? new Date(enteredDate).toLocaleDateString("en-us", {
-      month: "short",
-      day: "numeric",
-    }) : null;
+    // const dueDate = enteredDate ? new Date(enteredDate).toLocaleDateString("en-us", {
+    //   month: "short",
+    //   day: "numeric",
+    // }) : null;
 
     props.onSubmitTask({
       id: Math.random(),
       task: enteredTask,
-      due: dueDate,
+      due: enteredDate ? enteredDate : null,
       isDone: false,
     });
 
