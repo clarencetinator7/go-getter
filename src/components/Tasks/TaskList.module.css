@@ -1,32 +1,3 @@
 .task-list__container {
   padding: 0 1em;
 }
-
-.task-list .task-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1em 0;
-  height: 50px;
-  border-bottom: solid 1px #eeeeee;
-}
-
-.task-item__wrapper input[type="checkbox"] {
-  margin-right: 2em;
-  height: 16px;
-  width: 16px;
-  position: relative;
-  vertical-align: middle;
-  border: solid 2px var(--primary-text-color);
-}
-
-.task-item__wrapper label {
-  font-size: 1.7em;
-  color: var(--primary-text-color);
-}
-
-.task-item__wrapper.task-due__wrapper {
-  font-size: 1.6em;
-  color: var(--secondary-text-color);
-}
