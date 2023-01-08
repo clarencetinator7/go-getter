@@ -13,7 +13,7 @@ const TaskItem = props => {
   return (
     <li className={style["task-item"]}>
       <div className={style["task-item__wrapper"]}>
-        <input type="checkbox" name={props.id} id={props.id} />
+        <input type="checkbox" name={props.id} id={props.id}/>
         <label htmlFor={props.id}>{props.task}</label>
       </div>
       <div

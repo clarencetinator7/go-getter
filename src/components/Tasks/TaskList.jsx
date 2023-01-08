@@ -23,19 +23,36 @@ const TaskList = props => {
   
   const sortedTask = sortTasks(props.taskList);
 
-  const taskItems = sortedTask 
-    .filter((item) => {
-      return !item.isDone;
-    })
-    .map((item) => {
-      return <TaskItem key={item.id} id={item.id} task={item.task} due={item.due} />;
-    });  
+  const finishedTask = sortedTask.filter((item) => {
+    return item.isDone;
+  });
+  const onGoingTask = sortedTask.filter((item) => {
+    return !item.isDone;
+  });
+
+  const onGoingTaskItems = onGoingTask.map((item) => {
+    return (
+      <TaskItem key={item.id} id={item.id} task={item.task} due={item.due}/>
+    );
+  });  
+
+  const finishedTaskItems = finishedTask.map((item) => {
+    return (
+      <TaskItem key={item.id} id={item.id} task={item.task} due={item.due} />
+    );
+  });
 
   return (
     <div className={style['task-list__container']}>
       <ul className={style['task-list']}>
-        {taskItems}
+        {onGoingTaskItems}
       </ul>
+      <div className='task-list__finished-list'>
+        <span>Finished Tasks 🎉</span>
+        <ul> 
+          {finishedTaskItems}
+        </ul>
+      </div>
     </div>
   );  
 
