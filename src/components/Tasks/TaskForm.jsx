@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import TaskContext from '../Layout/Context/TaskContext';
 
 import style from './TaskForm.module.css';
 
-const TaskForm = props => {
+const TaskForm = () => {
+ 
+  const taskCtx = useContext(TaskContext);
   
   const [enteredTask, setEnteredTask] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
@@ -27,15 +30,17 @@ const TaskForm = props => {
       */
     }
 
-    props.onSubmitTask({
+    const newTask = {
       id: Math.random(),
       task: enteredTask,
       due: enteredDate ? enteredDate : null,
       isDone: false,
-    });
+    };
+    
+    taskCtx.addTask(newTask);
 
     setEnteredTask('');
-    setEnteredDate('')
+    setEnteredDate('');
 
   }
  

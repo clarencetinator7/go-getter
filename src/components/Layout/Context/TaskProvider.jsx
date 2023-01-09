@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useReducer} from "react";
 import TaskContext from "./TaskContext";
 
 const INITIAL_TASKS = [
@@ -34,13 +34,33 @@ const INITIAL_TASKS = [
   }
 ];
 
+const defaultTaskState = {
+  tasks: INITIAL_TASKS
+}
 
+const taskReducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TASK': {
+      const updatedTasks = [...state.tasks, action.newTask];
+      return updatedTasks;
+    }
+    default:
+      console.log(`default`);
+      break;
+  }
+}
 
 const TaskProvider = props => {
 
+  const [taskState, taskDispatchAction] = useReducer(taskReducer, defaultTaskState)  
+
+  const addTaskHandler = newTask => {
+    taskDispatchAction({type: 'ADD_TASK', newTask: newTask});
+  };  
+
   const taskContext = {
-    tasks: INITIAL_TASKS,
-    addTasks: (foo) => {},
+    tasks: taskState.tasks,
+    addTask: addTaskHandler,
     toggleTask: (foo) => {}
   }
 

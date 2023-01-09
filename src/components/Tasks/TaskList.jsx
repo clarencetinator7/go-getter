@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TaskContext from '../Layout/Context/TaskContext';
 import TaskItem from './TaskItem';
 
 import style from './TaskList.module.css';
 
 const TaskList = props => {
+
+  const taskCtx = useContext(TaskContext)
+
+  // console.log(taskCtx.tasks)  
 
   function sortTasks(tasks) {
   return tasks.sort((a, b) => {
@@ -20,7 +25,7 @@ const TaskList = props => {
   });
 }
   
-  const sortedTask = sortTasks(props.taskList);
+  const sortedTask = sortTasks(taskCtx.tasks);
 
   const finishedTask = sortedTask.filter((item) => {
     return item.isDone;
