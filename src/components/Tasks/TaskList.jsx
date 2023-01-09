@@ -40,6 +40,7 @@ const TaskList = props => {
         id={item.id}
         task={item.task}
         due={item.due}
+        isDone={item.isDone}
         onToggleHandler={toggleTask}
       />
     );
@@ -52,6 +53,7 @@ const TaskList = props => {
         id={item.id}
         task={item.task}
         due={item.due}
+        isDone={item.isDone}
         onToggleHandler={toggleTask}
       />
     );

@@ -55,6 +55,8 @@ const TaskPanel = () => {
     );
   };
 
+  console.log(taskList);
+
   return (
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
