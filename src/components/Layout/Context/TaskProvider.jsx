@@ -40,16 +40,23 @@ const defaultTaskState = {
 
 const taskReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TASK': {
+    case "ADD_TASK": {
       const updatedTasks = [...state.tasks, action.newTask];
       console.log(updatedTasks);
       return {
         ...state,
-        tasks: updatedTasks
+        tasks: updatedTasks,
       };
     }
-    case 'TOGGLE_TASK': {
+    case "TOGGLE_TASK": {
+      const updatedTasks = state.tasks.map((task) =>
+        task.id === action.taskId ? { ...task, isDone: !task.isDone } : task
+      );
       
+      return {
+        ...state,
+        tasks: updatedTasks
+      }
     }
     default:
       console.log(`default`);

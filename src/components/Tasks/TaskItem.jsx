@@ -19,7 +19,7 @@ const TaskItem = props => {
           onChange={() => {
             props.onToggleHandler(props.id);
           }}
-          checked={props.isDone ? props.isDone : false}
+          checked={props.isDone}
         />
         <label htmlFor={props.id}>{props.task}</label>
       </div>
