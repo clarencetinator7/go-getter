@@ -8,23 +8,21 @@ const TaskList = props => {
 
   const taskCtx = useContext(TaskContext)
 
-  // console.log(taskCtx.tasks)  
-
   function sortTasks(tasks) {
-  return tasks.sort((a, b) => {
-    if (a.due === null && b.due === null) {
-      return 0;
-    }
-    if (a.due === null) {
-      return -1;
-    }
-    if (b.due === null) {
-      return 1;
-    }
-    return new Date(a.due) - new Date(b.due);
-  });
-}
-  
+    return tasks.sort((a, b) => {
+      if (a.due === null && b.due === null) {
+        return 0;
+      }
+      if (a.due === null) {
+        return -1;
+      }
+      if (b.due === null) {
+        return 1;
+      }
+      return new Date(a.due) - new Date(b.due);
+    });
+  }
+
   const sortedTask = sortTasks(taskCtx.tasks);
 
   const finishedTask = sortedTask.filter((item) => {
@@ -35,7 +33,7 @@ const TaskList = props => {
   });
 
   const toggleTask = (id) => {
-    props.onToggleTask(id);
+    taskCtx.toggleTask(id);
   };
 
   const onGoingTaskItems = onGoingTask.map((item) => {

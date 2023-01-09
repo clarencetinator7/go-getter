@@ -6,14 +6,6 @@ import TaskContext from "../Context/TaskContext";
 import style from './TaskPanel.module.css';
 
 const TaskPanel = () => {
-
-  const toggleTaskHandler = (taskId) => {
-    // setTaskList(
-    //   taskList.map((task) =>
-    //     task.id === taskId ? { ...task, isDone: !task.isDone } : task
-    //   )
-    // );
-  };
   
   return (
     <main className={style["main-content"]}>
@@ -22,7 +14,7 @@ const TaskPanel = () => {
           <span className="content-title">TODAY:</span>
         </div>
         <TaskForm/>
-        <TaskList onToggleTask={toggleTaskHandler}/>
+        <TaskList/>
       </div>
     </main>
   );

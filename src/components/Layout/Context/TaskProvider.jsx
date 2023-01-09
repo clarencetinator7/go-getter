@@ -42,10 +42,18 @@ const taskReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TASK': {
       const updatedTasks = [...state.tasks, action.newTask];
-      return updatedTasks;
+      console.log(updatedTasks);
+      return {
+        ...state,
+        tasks: updatedTasks
+      };
+    }
+    case 'TOGGLE_TASK': {
+      
     }
     default:
       console.log(`default`);
+      return state;
       break;
   }
 }
@@ -58,10 +66,14 @@ const TaskProvider = props => {
     taskDispatchAction({type: 'ADD_TASK', newTask: newTask});
   };  
 
+  const toggleTaskHandler = taskId => {
+    taskDispatchAction({type: 'TOGGLE_TASK', taskId: taskId})
+  };
+
   const taskContext = {
     tasks: taskState.tasks,
     addTask: addTaskHandler,
-    toggleTask: (foo) => {}
+    toggleTask: toggleTaskHandler 
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;
