@@ -4,7 +4,7 @@ import TaskItem from './TaskItem';
 
 import style from './TaskList.module.css';
 
-const TaskList = props => {
+const TaskList = () => {
 
   const taskCtx = useContext(TaskContext)
 

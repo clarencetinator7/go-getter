@@ -1,7 +1,6 @@
-import React, {useContext, useState} from "react";
+import React from "react";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
-import TaskContext from "../Context/TaskContext";
 
 import style from './TaskPanel.module.css';
 

@@ -42,7 +42,6 @@ const taskReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK": {
       const updatedTasks = [...state.tasks, action.newTask];
-      console.log(updatedTasks);
       return {
         ...state,
         tasks: updatedTasks,
@@ -61,7 +60,6 @@ const taskReducer = (state, action) => {
     default:
       console.log(`default`);
       return state;
-      break;
   }
 }
 
