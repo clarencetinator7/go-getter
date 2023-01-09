@@ -1,4 +1,3 @@
-import moment from 'moment/moment';
 import React from 'react';
 import TaskItem from './TaskItem';
 
@@ -30,15 +29,31 @@ const TaskList = props => {
     return !item.isDone;
   });
 
+  const toggleTask = (id) => {
+    props.onToggleTask(id);
+  };
+
   const onGoingTaskItems = onGoingTask.map((item) => {
     return (
-      <TaskItem key={item.id} id={item.id} task={item.task} due={item.due}/>
+      <TaskItem
+        key={item.id}
+        id={item.id}
+        task={item.task}
+        due={item.due}
+        onToggleHandler={toggleTask}
+      />
     );
   });  
 
   const finishedTaskItems = finishedTask.map((item) => {
     return (
-      <TaskItem key={item.id} id={item.id} task={item.task} due={item.due} />
+      <TaskItem
+        key={item.id}
+        id={item.id}
+        task={item.task}
+        due={item.due}
+        onToggleHandler={toggleTask}
+      />
     );
   });
 

@@ -39,12 +39,20 @@ const INITIAL_TASKS = [
 
 const TaskPanel = () => {
   
-  const [taskList, addNewTask] = useState(INITIAL_TASKS);
+  const [taskList, setTaskList] = useState(INITIAL_TASKS);
 
   const addTaskHandler = newTask => {
-    addNewTask(prevTask => {
+    setTaskList(prevTask => {
       return [...prevTask, newTask]
     });
+  };
+
+  const toggleTaskHandler = (taskId) => {
+    setTaskList(
+      taskList.map((task) =>
+        task.id === taskId ? { ...task, isDone: !task.isDone } : task
+      )
+    );
   };
 
   return (
@@ -54,7 +62,7 @@ const TaskPanel = () => {
           <span className="content-title">TODAY:</span>
         </div>
         <TaskForm onSubmitTask={addTaskHandler} />
-        <TaskList taskList={taskList}/>
+        <TaskList taskList={taskList} onToggleTask={toggleTaskHandler}/>
       </div>
     </main>
   );

@@ -7,8 +7,6 @@ const TaskForm = props => {
   const [enteredTask, setEnteredTask] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
 
-  const today = new Date();
-
   const onEnterTaskHandler = e => {
     setEnteredTask(e.target.value);
   }
@@ -28,12 +26,6 @@ const TaskForm = props => {
         ADD EMPTY INPUT WARNING.
       */
     }
-    
-
-    // const dueDate = enteredDate ? new Date(enteredDate).toLocaleDateString("en-us", {
-    //   month: "short",
-    //   day: "numeric",
-    // }) : null;
 
     props.onSubmitTask({
       id: Math.random(),
@@ -46,7 +38,7 @@ const TaskForm = props => {
     setEnteredDate('')
 
   }
-  
+ 
   return (
     <form className={style['task-input__container']} onSubmit={onSubmitHandler}>
       <div className={`${style['input-wrapper']} ${style['text-wrapper']}`}>
