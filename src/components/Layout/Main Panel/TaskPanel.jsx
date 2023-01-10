@@ -1,5 +1,6 @@
 import moment from "moment/moment";
 import React, { useContext } from "react";
+import FinishedTasksList from "../../Tasks/FinishedTasksList";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
 import TaskContext from "../Context/TaskContext";
@@ -10,6 +11,10 @@ const TaskPanel = (props) => {
   
   const taskCtx = useContext(TaskContext);
   let filteredTasks = taskCtx.tasks;
+
+  const finishedTasks = taskCtx.tasks.filter((item) => {
+    return item.isDone;
+  });
 
   if(props.displayed === 'TODAY') {
     filteredTasks = taskCtx.getSortedTasks().filter(item => {
@@ -33,6 +38,7 @@ const TaskPanel = (props) => {
         </div>
         <TaskForm/>
         <TaskList displayedTasks={filteredTasks}/>
+        <FinishedTasksList finishedTasks={finishedTasks} />
       </div>
     </main>
   );
