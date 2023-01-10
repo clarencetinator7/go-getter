@@ -1,10 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import TaskContext from '../Layout/Context/TaskContext';
 import TaskItem from './TaskItem';
 
 import style from './TaskList.module.css';
 
+/* FONT AWESOME IMPORTS */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
+const faIcons = {
+  chevronDown: <FontAwesomeIcon icon={faChevronDown} className={style["drop-icon"]} />,
+}
+
 const TaskList = () => {
+
+  const [isOpen, setIsOpen] =  useState(false);
 
   const taskCtx = useContext(TaskContext);
 
@@ -47,14 +57,19 @@ const TaskList = () => {
     );
   });
 
+  const onClickHandler = () => {
+    setIsOpen(!isOpen);
+  } 
+
   return (
     <div className={style['task-list__container']}>
       <ul className={style['task-list']}>
         {onGoingTaskItems}
       </ul>
-      <div className='task-list__finished-list'>
-        <span>Finished Tasks 🎉</span>
-        <ul> 
+      <div className={style['task-list__finished-list']}>
+        <span className={style['list-title']} onClick={onClickHandler}>🎉 Finished Tasks {faIcons.chevronDown}
+        </span>
+        <ul className={`${style['finished-tasks']} ${!isOpen ? style['collapsed'] : ''}`}> 
           {finishedTaskItems}
         </ul>
       </div>
