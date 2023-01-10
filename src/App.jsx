@@ -8,10 +8,14 @@ function App() {
   
   const [currDisplayed, setDisplayed] = useState('TODAY');
 
+  const setDisplayedHandler = (display) => {
+    setDisplayed(display);
+  }
+
   return (
     <TaskProvider>
       <div className="parent-container">
-        <Sidebar />
+        <Sidebar setDisplay={setDisplayedHandler}/>
         <TaskPanel displayed={currDisplayed} />
       </div>
     </TaskProvider>

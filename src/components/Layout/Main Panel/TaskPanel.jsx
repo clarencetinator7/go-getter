@@ -12,9 +12,12 @@ const TaskPanel = (props) => {
   let filteredTasks = taskCtx.tasks;
 
   if(props.displayed === 'TODAY') {
-    filteredTasks = taskCtx.tasks.filter(item => {
+    filteredTasks = taskCtx.getSortedTasks().filter(item => {
       return moment(item.due).isSame(moment(), 'day') || item.due === null;
     });
+  }
+  if(props.displayed === 'INBOX') {
+    filteredTasks = taskCtx.getSortedTasks();
   }
 
   return (

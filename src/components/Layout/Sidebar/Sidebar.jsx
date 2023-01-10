@@ -14,7 +14,7 @@ const faIcons = {
   chevronDown: <FontAwesomeIcon icon={faChevronDown} className={style["drop-icon"]} />,
 };
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
   return(
     <nav className={style.sidebar}>
@@ -22,13 +22,17 @@ const Sidebar = () => {
         <span>GO-GETTER</span>
       </div>
       <ul className={style.sidebar__nav}>
-        <li className={`${style["nav__nav-item"]} ${style.active}`}>
+        <li className={`${style["nav__nav-item"]} ${style.active}`} onClick={() => {
+          props.setDisplay('TODAY')
+        }}>
           <span className={style["nav-link"]}>
             {faIcons.day}
             Today
           </span>
         </li>
-        <li className={style["nav__nav-item"]}>
+        <li className={style["nav__nav-item"]} onClick={() => {
+          props.setDisplay('INBOX')
+        }}>
           <span className={style["nav-link"]}>
           {faIcons.inbox}
             Inbox
