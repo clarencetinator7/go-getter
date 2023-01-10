@@ -6,9 +6,7 @@ import style from './TaskList.module.css';
 
 const TaskList = () => {
 
-  const taskCtx = useContext(TaskContext)
-
-  
+  const taskCtx = useContext(TaskContext);
 
   const sortedTask = taskCtx.getSortedTasks();
 
