@@ -6,7 +6,7 @@ import Sidebar from './components/Layout/Sidebar/Sidebar';
 
 function App() {
   
-  const [currDisplayed, setDisplayed] = useState('TODAY');
+  const [currDisplayed, setDisplayed] = useState('INBOX');
 
   const setDisplayedHandler = (display) => {
     setDisplayed(display);
@@ -15,7 +15,7 @@ function App() {
   return (
     <TaskProvider>
       <div className="parent-container">
-        <Sidebar setDisplay={setDisplayedHandler}/>
+        <Sidebar setDisplay={setDisplayedHandler} displayed={currDisplayed}/>
         <TaskPanel displayed={currDisplayed} />
       </div>
     </TaskProvider>

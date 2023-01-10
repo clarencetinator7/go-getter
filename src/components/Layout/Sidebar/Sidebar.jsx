@@ -16,43 +16,54 @@ const faIcons = {
 
 const Sidebar = (props) => {
 
-  return(
+  return (
     <nav className={style.sidebar}>
       <div className={style["sidebar__logo-container"]}>
         <span>GO-GETTER</span>
       </div>
       <ul className={style.sidebar__nav}>
-        <li className={`${style["nav__nav-item"]} ${style.active}`} onClick={() => {
-          props.setDisplay('TODAY')
-        }}>
+        <li
+          className={`${style["nav__nav-item"]} ${
+            props.displayed === "TODAY" ? style.active : ""
+          }`}
+          onClick={() => {
+            props.setDisplay("TODAY");
+          }}
+        >
           <span className={style["nav-link"]}>
             {faIcons.day}
             Today
           </span>
         </li>
-        <li className={style["nav__nav-item"]} onClick={() => {
-          props.setDisplay('INBOX')
-        }}>
+        <li
+          className={`${style["nav__nav-item"]} ${props.displayed === 'INBOX' ? style.active : ''}`}
+          onClick={() => {
+            props.setDisplay("INBOX");
+          }}
+        >
           <span className={style["nav-link"]}>
-          {faIcons.inbox}
+            {faIcons.inbox}
             Inbox
           </span>
         </li>
-        <li className={style["nav__nav-item"]} onClick={() => {
-          props.setDisplay('NEXTWEEK')
-        }}>
+        <li
+          className={`${style["nav__nav-item"]} ${props.displayed === 'NEXTWEEK' ? style.active : ''}`}
+          onClick={() => {
+            props.setDisplay("NEXTWEEK");
+          }}
+        >
           <span className={style["nav-link"]}>
-          {faIcons.calendarWeek}
+            {faIcons.calendarWeek}
             Next 7 Days
           </span>
         </li>
-        <li className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style["active-list"]}`}>
+        <li
+          className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style["active-list"]}`}
+        >
           {faIcons.chevronDown}
           Lists
           <ul className={style["sub-list"]}>
-            <li className={style["sub-list-item"]}>
-              # Chores
-            </li>
+            <li className={style["sub-list-item"]}># Chores</li>
           </ul>
         </li>
       </ul>
