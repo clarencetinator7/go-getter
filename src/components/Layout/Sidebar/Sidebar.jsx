@@ -38,7 +38,9 @@ const Sidebar = (props) => {
             Inbox
           </span>
         </li>
-        <li className={style["nav__nav-item"]}>
+        <li className={style["nav__nav-item"]} onClick={() => {
+          props.setDisplay('NEXTWEEK')
+        }}>
           <span className={style["nav-link"]}>
           {faIcons.calendarWeek}
             Next 7 Days

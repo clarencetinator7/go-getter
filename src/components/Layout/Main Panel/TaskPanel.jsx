@@ -19,6 +19,11 @@ const TaskPanel = (props) => {
   if(props.displayed === 'INBOX') {
     filteredTasks = taskCtx.getSortedTasks();
   }
+  if(props.displayed === 'NEXTWEEK') {
+    filteredTasks = taskCtx.getSortedTasks().filter(item => {
+      return moment(item.due).isAfter(moment(), 'week')
+    });
+  }
 
   return (
     <main className={style["main-content"]}>
