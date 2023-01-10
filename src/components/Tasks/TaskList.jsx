@@ -3,27 +3,27 @@ import TaskContext from '../Layout/Context/TaskContext';
 import TaskItem from './TaskItem';
 
 import style from './TaskList.module.css';
-
+//#region  Other Imports
 /* FONT AWESOME IMPORTS */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-
+//#endregion
 const faIcons = {
   chevronDown: <FontAwesomeIcon icon={faChevronDown} className={style["drop-icon"]} />,
 }
 
-const TaskList = () => {
+const TaskList = (props) => {
 
   const [isOpen, setIsOpen] =  useState(false);
 
   const taskCtx = useContext(TaskContext);
 
-  const sortedTask = taskCtx.getSortedTasks();
+  // const sortedTask = taskCtx.getSortedTasks();
 
-  const finishedTask = sortedTask.filter((item) => {
+  const finishedTask = props.displayedTasks.filter((item) => {
     return item.isDone;
   });
-  const onGoingTask = sortedTask.filter((item) => {
+  const onGoingTask = props.displayedTasks.filter((item) => {
     return !item.isDone;
   });
 

@@ -1,11 +1,22 @@
-import React from "react";
+import moment from "moment/moment";
+import React, { useContext } from "react";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
+import TaskContext from "../Context/TaskContext";
 
 import style from './TaskPanel.module.css';
 
-const TaskPanel = () => {
+const TaskPanel = (props) => {
   
+  const taskCtx = useContext(TaskContext);
+  let filteredTasks = taskCtx.tasks;
+
+  if(props.displayed === 'TODAY') {
+    filteredTasks = taskCtx.tasks.filter(item => {
+      return moment(item.due).isSame(moment(), 'day') || item.due === null;
+    });
+  }
+
   return (
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
@@ -13,7 +24,7 @@ const TaskPanel = () => {
           <span className="content-title">TODAY:</span>
         </div>
         <TaskForm/>
-        <TaskList/>
+        <TaskList displayedTasks={filteredTasks}/>
       </div>
     </main>
   );
