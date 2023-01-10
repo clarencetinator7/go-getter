@@ -66,13 +66,6 @@ const TaskList = (props) => {
       <ul className={style['task-list']}>
         {onGoingTaskItems}
       </ul>
-      <div className={style['task-list__finished-list']}>
-        <span className={style['list-title']} onClick={onClickHandler}>🎉 Finished Tasks {faIcons.chevronDown}
-        </span>
-        <ul className={`${style['finished-tasks']} ${!isOpen ? style['collapsed'] : ''}`}> 
-          {finishedTaskItems}
-        </ul>
-      </div>
     </div>
   );  
 
