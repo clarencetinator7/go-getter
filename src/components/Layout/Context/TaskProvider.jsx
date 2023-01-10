@@ -5,7 +5,7 @@ const INITIAL_TASKS = [
   {
     id: 1,
     task: "Buy groceries",
-    due: "2023-01-06",
+    due: "2023-01-10",
     isDone: false
   },
   {
@@ -17,19 +17,19 @@ const INITIAL_TASKS = [
   {
     id: 3,
     task: "Attend yoga class",
-    due: "2023-01-08",
+    due: "2023-01-14",
     isDone: false
   },
   {
     id: 4,
     task: "Call dentist for appointment",
-    due: "2023-01-09",
+    due: "2023-01-14",
     isDone: false
   },
   {
     id: 5,
     task: "Submit expense report",
-    due: "2023-01-10",
+    due: "2023-01-23",
     isDone: true
   }
 ];

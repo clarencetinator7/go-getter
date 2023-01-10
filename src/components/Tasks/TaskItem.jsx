@@ -5,9 +5,21 @@ import style from './TaskItem.module.css';
 
 const TaskItem = props => {
 
-  let formattedDue = moment(props.due).isValid()
-    ? moment(props.due).format("D MMM")
-    : "";
+  let formattedDue = ''; 
+  
+  if(moment(props.due).isValid) {
+    formattedDue = moment(props.due).format("D MMM");
+    
+    if(moment(props.due).isSame(moment(), 'week')) {
+      formattedDue = moment(props.due).format("dddd")
+      
+    }
+
+    if(moment(props.due).isSame(moment(), 'day')) {
+      formattedDue = moment(props.due).format('[Today]');
+    }
+
+  }
 
   return (
     <li className={style["task-item"]}>
