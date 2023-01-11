@@ -36,7 +36,8 @@ const TaskItem = props => {
       <div
         className={`${style["task-item__wrapper"]} ${style["task-due__wrapper"]} ${isOverdue && !props.isDone ? style["overdue"] : ""}`}
       >
-        <span>{formattedDue}</span>
+        <span className={style['due-txt']}>{formattedDue}</span><br />
+        <span>{`# ${props.list}`}</span>
       </div>
     </li>
   );
