@@ -18,24 +18,43 @@ const ListFilter = (props) => {
 
   const [isListOpen, setIsListOpen] = useState(false);
 
+  const onClickHandler = () => {
+    setIsListOpen((prevState) => {
+      return !prevState;
+    });
+  };
+
   const displayList = taskCtx.lists.map((item) => {
     return (
-      <li key={item} id={item} className={style["list-item"]} onClick={(e) => {props.setDisplay(e.target.id)}}>
-        {item}
+      <li
+        key={item}
+        id={item}
+        className={style["list-item"]}
+        onClick={(e) => {
+          props.setDisplay(e.target.id);
+        }}
+      >
+        {`# ${item}`}
       </li>
     );
   });
 
   return (
     <div className={style["task-list"]}>
-      <span className={style["task-list__header"]}>
+      <span
+        className={`${style["task-list__header"]} ${
+          !isListOpen && style["collapsed"]
+        }`}
+        onClick={onClickHandler}
+      >
         List {faIcons.chevronDown}
       </span>
-      <ul className={style.lists}>
+      <ul className={`${style.lists} ${!isListOpen && style["collapsed"]}`}>
         {displayList}
-        <li>
-          <input type="text" placeholder="Add List :>" />
-        </li>
+        <div className={style["input-wrapper"]}>
+          <span># </span>
+          <input type="text" placeholder="click-to-add-list" />
+        </div>
       </ul>
     </div>
   );
