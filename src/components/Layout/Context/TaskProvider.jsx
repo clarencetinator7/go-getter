@@ -39,8 +39,14 @@ const INITIAL_TASKS = [
   }
 ];
 
+const INITIAL_LIST = [
+  'Chores',
+  'Self-care',
+]
+
 const defaultTaskState = {
-  tasks: INITIAL_TASKS
+  tasks: INITIAL_TASKS,
+  lists: INITIAL_LIST
 }
 
 const taskReducer = (state, action) => {
@@ -102,6 +108,7 @@ const TaskProvider = props => {
 
   const taskContext = {
     tasks: taskState.tasks,
+    lists: taskState.lists,
     addTask: addTaskHandler,
     toggleTask: toggleTaskHandler,
     getSortedTasks: sortTaskHandler, 
