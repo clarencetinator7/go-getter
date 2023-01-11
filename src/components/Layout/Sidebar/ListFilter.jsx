@@ -26,11 +26,22 @@ const ListFilter = (props) => {
   };
 
   const onEnterListHandler = (e) => {
+    if (e.target.value[0] === " ") {
+      return;
+    }
+    if(e.target.value.match(/-{2,}/g)) return;
     setEnteredList(e.target.value.replace(/\s/g, '-'));
-  }
+  };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
 
+    if(enteredList){
+
+    }
+
+    taskCtx.addList(enteredList)
+    setEnteredList('');
   }
 
   const displayList = taskCtx.lists.map((item) => {

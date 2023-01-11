@@ -6,6 +6,7 @@ const TaskContext = React.createContext({
   addTask: (newTask) => {},
   toggleTask: (taskId) => {},
   getSortedTasks: () => {},
+  addList: (list) => {},
 });
 
 export default TaskContext;

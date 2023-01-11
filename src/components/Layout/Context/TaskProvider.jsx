@@ -69,6 +69,13 @@ const taskReducer = (state, action) => {
         tasks: updatedTasks
       }
     }
+    case "ADD_LIST": {
+      const updatedList = state.lists.concat(action.newList);
+      return {
+        ...state,
+        lists: updatedList
+      }
+    }
     default:
       console.log(`default`);
       return state;
@@ -107,12 +114,17 @@ const TaskProvider = props => {
     return sortedTask;
   }
 
+  const addListHandler = (newList) => {
+    taskDispatchAction({type: 'ADD_LIST', newList: newList})
+  }
+
   const taskContext = {
     tasks: taskState.tasks,
     lists: taskState.lists,
     addTask: addTaskHandler,
     toggleTask: toggleTaskHandler,
     getSortedTasks: sortTaskHandler, 
+    addList: addListHandler,
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;
