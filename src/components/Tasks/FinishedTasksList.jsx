@@ -39,7 +39,7 @@ const FinishedTasksList = (props) => {
 
   return (
     <div className={style["task-list__finished-list"]}>
-      <span className={style["list-title"]} onClick={onClickHandler}>
+      <span className={`${style['list-title']} ${!isOpen ? style['collapsed'] : ''}`} onClick={onClickHandler}>
         🎉 Finished Tasks {faIcons.chevronDown}
       </span>
       <ul

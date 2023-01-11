@@ -3,15 +3,32 @@
 }
 
 .task-list__finished-list .list-title {
-  font-size: 1.7em;
-  font-weight: 600;
-  color: var(--primary-text-color);
+  font-size: 1.6em;
+  /* color: var(--primary-text-color); */
+  cursor: pointer;
+  transition: .200s ease;
+}
+
+.list-title.collapsed {
+  color: var(--secondary-text-color);
 }
 
 .drop-icon {
   color: var(--secondary-text-color);
+  transition: .200s ease;
+}
+
+.list-title.collapsed .drop-icon{
+  transform: rotate(-90deg);
+}
+
+.finished-tasks {  
+  opacity: 0.5;
 }
 
 .finished-tasks.collapsed {
   display: none;
 }
+
+
+
