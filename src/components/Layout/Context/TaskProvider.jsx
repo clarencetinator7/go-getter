@@ -42,6 +42,7 @@ const INITIAL_TASKS = [
 const INITIAL_LIST = [
   'Chores',
   'Self-care',
+  'Work',
 ]
 
 const defaultTaskState = {

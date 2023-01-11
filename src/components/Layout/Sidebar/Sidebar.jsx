@@ -61,7 +61,7 @@ const Sidebar = (props) => {
           </span>
         </li>
       </ul>
-      <ListFilter />
+      <ListFilter setDisplay={props.setDisplay}/>
     </nav>
   );
 

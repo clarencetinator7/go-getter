@@ -6,3 +6,14 @@
   font-size: 1.6em;
   color: var(--primary-text-color);
 }
+
+.task-list .lists {
+  padding-left: 1em;
+  font-size: 1.5em;
+  color: var(--primary-text-color);
+}
+
+.task-list .lists li { 
+  margin: .2em;
+  padding: 5px 3px;
+}

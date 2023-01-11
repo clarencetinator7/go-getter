@@ -10,6 +10,7 @@ function App() {
 
   const setDisplayedHandler = (display) => {
     setDisplayed(display);
+    console.log(display);
   }
 
   return (
