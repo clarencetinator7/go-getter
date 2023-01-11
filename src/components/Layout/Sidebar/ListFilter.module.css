@@ -1,0 +1,8 @@
+.task-list {
+  margin: 2em 2em;
+}
+
+.task-list__header {
+  font-size: 1.6em;
+  color: var(--primary-text-color);
+}
