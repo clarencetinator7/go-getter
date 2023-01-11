@@ -17,12 +17,21 @@ const ListFilter = (props) => {
   const taskCtx = useContext(TaskContext);
 
   const [isListOpen, setIsListOpen] = useState(false);
+  const [enteredList, setEnteredList] = useState('');
 
   const onClickHandler = () => {
     setIsListOpen((prevState) => {
       return !prevState;
     });
   };
+
+  const onEnterListHandler = (e) => {
+    setEnteredList(e.target.value.replace(/\s/g, '-'));
+  }
+
+  const onSubmitHandler = () => {
+
+  }
 
   const displayList = taskCtx.lists.map((item) => {
     return (
@@ -51,10 +60,10 @@ const ListFilter = (props) => {
       </span>
       <ul className={`${style.lists} ${!isListOpen && style["collapsed"]}`}>
         {displayList}
-        <div className={style["input-wrapper"]}>
+        <form className={style["input-wrapper"]} onSubmit={onSubmitHandler}>
           <span># </span>
-          <input type="text" placeholder="click-to-add-list" />
-        </div>
+          <input type="text" onChange={onEnterListHandler} value={enteredList} placeholder="Click-to-add-list" />
+        </form>
       </ul>
     </div>
   );
