@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import style from './Sidebar.module.css'
 
 /* FONT AWESOME IMPORTS */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDay, faInbox, faCalendarWeek, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import ListFilter from "./ListFilter";
 
 
 const faIcons = {
@@ -15,6 +16,8 @@ const faIcons = {
 };
 
 const Sidebar = (props) => {
+
+  
 
   return (
     <nav className={style.sidebar}>
@@ -57,16 +60,8 @@ const Sidebar = (props) => {
             Next 7 Days
           </span>
         </li>
-        <li
-          className={`${style["nav__nav-item"]} ${style["task-lists"]} ${style["active-list"]}`}
-        >
-          {faIcons.chevronDown}
-          Lists
-          <ul className={style["sub-list"]}>
-            <li className={style["sub-list-item"]}># Chores</li>
-          </ul>
-        </li>
       </ul>
+      <ListFilter setDisplay={props.setDisplay}/>
     </nav>
   );
 

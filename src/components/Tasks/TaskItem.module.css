@@ -6,6 +6,7 @@
   margin: 1em 0;
   height: 50px;
   border-bottom: solid 1px #eeeeee;
+  padding: .5em 1em;
 }
 
 .task-item__wrapper input[type="checkbox"] {
@@ -25,8 +26,10 @@
 .task-item__wrapper.task-due__wrapper {
   font-size: 1.4em;
   color: var(--secondary-text-color);
+  text-align: right;
 }
 
-.task-due__wrapper.overdue {
+
+.task-due__wrapper.overdue .due-txt{
   color: #e63946;
 }

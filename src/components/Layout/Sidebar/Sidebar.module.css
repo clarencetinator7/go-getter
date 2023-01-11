@@ -46,24 +46,3 @@
   padding-right: 9px;
 }
 
-.task-lists {
-  margin-top: 1em !important;
-  padding: 4px 15px !important;
-}
-
-.task-lists .drop-icon {
-  color: var(--secondary-text-color);
-  padding-right: 10px;
-  font-size: .8em !important;
-}
-
-.task-lists.active-list .sub-list {
-  display: none;
-  margin-left: 23px;
-}
-
-.sub-list .sub-list-item {
-  padding: 4px 0;
-  margin: 3.5px;
-}
-

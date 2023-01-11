@@ -32,6 +32,7 @@ const FinishedTasksList = (props) => {
         task={item.task}
         due={item.due}
         isDone={item.isDone}
+        list={item.list}
         onToggleHandler={toggleTask}
       />
     );

@@ -1,5 +1,5 @@
 import moment from "moment/moment";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FinishedTasksList from "../../Tasks/FinishedTasksList";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
@@ -12,31 +12,45 @@ const TaskPanel = (props) => {
   const taskCtx = useContext(TaskContext);
   let filteredTasks = taskCtx.tasks;
 
-  const finishedTasks = taskCtx.tasks.filter((item) => {
+  let isList = false;
+  let listName = '';
+
+  let finishedTasks = taskCtx.tasks.filter((item) => {
     return item.isDone;
   });
 
+
   if(props.displayed === 'TODAY') {
+    listName = '🌞 Today'
     filteredTasks = taskCtx.getSortedTasks().filter(item => {
       return moment(item.due).isSame(moment(), 'day') || item.due === null;
     });
-  }
-  if(props.displayed === 'INBOX') {
+  } else if(props.displayed === 'INBOX') {
+    listName = '📥 Inbox'
     filteredTasks = taskCtx.getSortedTasks();
-  }
-  if(props.displayed === 'NEXTWEEK') {
+  } else if(props.displayed === 'NEXTWEEK') {
+    listName = '📅 Next Week'
     filteredTasks = taskCtx.getSortedTasks().filter(item => {
       return moment(item.due).isAfter(moment(), 'week')
     });
+  } else {
+    isList = true;
+    listName = props.displayed
+    filteredTasks = taskCtx.getSortedTasks().filter(item => {
+      return item.list === props.displayed;
+    })
+    finishedTasks = finishedTasks.filter((item) => {
+      return item.list === props.displayed;
+    })
   }
 
   return (
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
         <div className={style["main-content__header"]}>
-          <span className="content-title">TODAY:</span>
+          <span className="content-title">{`${isList ? '#️' : ''} ${listName}:`}</span>
         </div>
-        <TaskForm/>
+        <TaskForm isList={isList} listName={listName}/>
         <TaskList displayedTasks={filteredTasks}/>
         <FinishedTasksList finishedTasks={finishedTasks} />
       </div>

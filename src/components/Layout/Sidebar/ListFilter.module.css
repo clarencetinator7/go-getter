@@ -1,0 +1,82 @@
+.task-list {
+  margin: 2em 2em;
+}
+
+.task-list__header {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: var(--secondary-text-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transition: .200s ease;
+  cursor: pointer;
+}
+
+.task-list__header:hover, .task-list__header:hover .drop-icon {
+  color: var(--primary-text-color);
+}
+
+.drop-icon {
+  color: var(--secondary-text-color);
+  transition: .200s ease;
+}
+
+.task-list__header.collapsed .drop-icon {
+  transform: rotate(-90deg);
+}
+
+.task-list .lists {
+  color: var(--primary-text-color);
+}
+
+.task-list .lists.collapsed {
+  display: none;
+}
+
+.task-list .lists li { 
+  font-size: 1.5em;
+  margin: .2em;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.task-list .lists li:hover {
+  background-color: var(--gray-bg-color);
+}
+
+.task-list .list li.active {
+  background-color: var(--secondary-faded-color);
+}
+
+.input-wrapper {
+  color: var(--secondary-text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.input-wrapper:has(input:focus), .input-wrapper:hover {
+  background-color: var(--gray-bg-color);
+}
+
+.input-wrapper span {
+  font-size: 1.6em;
+}
+
+.input-wrapper input {
+  flex-grow: 1;
+  font-size: 1.6em;
+  border: none;
+  width: 100%;
+  padding: .5em;
+  background: transparent;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+}
