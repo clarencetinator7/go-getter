@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import React, { useContext, useState } from 'react';
 import TaskContext from '../Layout/Context/TaskContext';
 
@@ -50,7 +51,7 @@ const TaskForm = () => {
         <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder='➕ Add new task' />
       </div>
       <div className={`${style['input-wrapper']} ${style['date-wrapper']}`}>
-        <input type='date' value={enteredDate} onChange={onEnterDateHandler}/>
+        <input type='date' value={enteredDate} onChange={onEnterDateHandler} min={moment().format('YYYY-MM-DD')}/>
       </div>
       <button type='submit' hidden/>
     </form>

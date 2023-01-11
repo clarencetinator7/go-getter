@@ -12,7 +12,7 @@ const TaskItem = props => {
     formattedDue = moment(props.due).format("D MMM");
     
     if(moment(props.due).isSame(moment(), 'week')) {
-      formattedDue = moment(props.due).format("dddd")
+      formattedDue = moment(props.due).format("ddd")
     }
     if(moment(props.due).isSame(moment(), 'day')) {
       formattedDue = moment(props.due).format('[Today]');
