@@ -6,31 +6,36 @@ const INITIAL_TASKS = [
     id: 1,
     task: "Buy groceries",
     due: "2023-01-10",
-    isDone: false
+    isDone: false,
+    list: "Inbox"
   },
   {
     id: 2,
     task: "Finish project proposal",
     due: "2023-01-07",
-    isDone: true
+    isDone: true,
+    list: "Inbox"
   },
   {
     id: 3,
     task: "Attend yoga class",
     due: "2023-01-14",
-    isDone: false
+    isDone: false,
+    list: "Inbox"
   },
   {
     id: 4,
     task: "Call dentist for appointment",
     due: "2023-01-14",
-    isDone: false
+    isDone: false,
+    list: "Inbox"
   },
   {
     id: 5,
     task: "Submit expense report",
     due: "2023-01-23",
-    isDone: true
+    isDone: true,
+    list: "Inbox"
   }
 ];
 
