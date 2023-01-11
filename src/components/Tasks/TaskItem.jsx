@@ -5,7 +5,8 @@ import style from './TaskItem.module.css';
 
 const TaskItem = props => {
 
-  let formattedDue = ''; 
+  let formattedDue = '';
+  const isOverdue = moment(props.due).isBefore(moment(), 'day');
   
   if(moment(props.due).isValid()) {
     formattedDue = moment(props.due).format("D MMM");
@@ -33,7 +34,7 @@ const TaskItem = props => {
         <label htmlFor={props.id}>{props.task}</label>
       </div>
       <div
-        className={`${style["task-item__wrapper"]} ${style["task-due__wrapper"]}`}
+        className={`${style["task-item__wrapper"]} ${style["task-due__wrapper"]} ${isOverdue && !props.isDone ? style["overdue"] : ""}`}
       >
         <span>{formattedDue}</span>
       </div>

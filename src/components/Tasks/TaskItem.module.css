@@ -23,6 +23,10 @@
 }
 
 .task-item__wrapper.task-due__wrapper {
-  font-size: 1.6em;
+  font-size: 1.2em;
   color: var(--secondary-text-color);
+}
+
+.task-due__wrapper.overdue {
+  color: #e63946;
 }
