@@ -38,10 +38,27 @@
   color: #e63946;
 }
 
-.task-item__options button {
+.task-item__options-wrapper {
+  position: relative;
+}
+
+.task-item__options-wrapper .optionsBtn {
   border: none;
   background-color: transparent;
   color: var(--secondary-text-color);
   font-size: 1.6em;
   cursor: pointer;
+}
+
+.task-item__options-wrapper .options {
+  /* display: none; */
+  position: absolute;
+  z-index: 5;
+  bottom: -35px;
+  right: 0;
+  width: 100px;
+  padding: 1em;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  background-color: white;
 }
