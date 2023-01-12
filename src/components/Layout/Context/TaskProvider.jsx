@@ -59,6 +59,13 @@ const taskReducer = (state, action) => {
         tasks: updatedTasks,
       };
     }
+    case "DELETE_TASK": {
+      const updatedTask = state.tasks.filter(task => action.taskId !== task.id);
+      return {
+        ...state,
+        tasks: updatedTask
+      }
+    }
     case "TOGGLE_TASK": {
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId ? { ...task, isDone: !task.isDone } : task
@@ -88,7 +95,11 @@ const TaskProvider = props => {
 
   const addTaskHandler = newTask => {
     taskDispatchAction({type: 'ADD_TASK', newTask: newTask});
-  };  
+  }; 
+  
+  const deleteTaskHandler = taskId => {
+    taskDispatchAction({type: 'DELETE_TASK', taskId: taskId})
+  }
 
   const toggleTaskHandler = taskId => {
     taskDispatchAction({type: 'TOGGLE_TASK', taskId: taskId})
@@ -122,6 +133,7 @@ const TaskProvider = props => {
     tasks: taskState.tasks,
     lists: taskState.lists,
     addTask: addTaskHandler,
+    deleteTask: deleteTaskHandler,
     toggleTask: toggleTaskHandler,
     getSortedTasks: sortTaskHandler, 
     addList: addListHandler,

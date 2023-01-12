@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import moment from 'moment/moment';
 
 import style from './TaskItem.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import TaskContext from '../Layout/Context/TaskContext';
 
 const TaskItem = props => {
+
+  const taskCtx = useContext(TaskContext)
 
   const [optionState, toggleOption] = useState(false);
 
@@ -27,6 +30,10 @@ const TaskItem = props => {
   const optionButtonClickHandler = () => {
     console.log(`Options clicked. Task: ${props.id}, ${props.task}`)
     toggleOption(!optionState)
+  }
+
+  const deleteTaskHandler = () => {
+    taskCtx.deleteTask(props.id);
   }
 
   return (
@@ -67,8 +74,11 @@ const TaskItem = props => {
           }}
           style={{ display: optionState ? "block" : "none" }}
         >
-          <button type="button" className={style.deleteBtn}>
-            Delete Task
+          <button type="button" className={style.deleteBtn} onClick={deleteTaskHandler}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+          <button type="button" className={style.editBtn}>
+            <FontAwesomeIcon icon={faPenToSquare} />
           </button>
         </div>
       </div>
