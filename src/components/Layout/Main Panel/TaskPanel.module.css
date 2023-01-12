@@ -44,3 +44,7 @@
 .task-container::-webkit-scrollbar-thumb:hover {
   background: rgb(169, 169, 169);
 }
+
+.list-empty-icon {
+  max-width: 450px;
+}

@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React, {useReducer} from "react";
 import TaskContext from "./TaskContext";
 
@@ -5,37 +6,42 @@ const INITIAL_TASKS = [
   {
     id: 1,
     task: "Buy groceries",
+    list: "Chores",
     due: "2023-01-10",
     isDone: false,
-    list: "Chores"
+    finishedDate: null 
   },
   {
     id: 2,
     task: "Finish project proposal",
+    list: "Inbox",
     due: "2023-01-07",
     isDone: true,
-    list: "Inbox"
+    finishedDate: "2023-01-08" 
   },
   {
     id: 3,
     task: "Attend yoga class",
+    list: "Self-care",
     due: "2023-01-14",
     isDone: false,
-    list: "Self-care"
+    finishedDate: null 
   },
   {
     id: 4,
     task: "Call dentist for appointment",
+    list: "Self-care",
     due: "2023-01-14",
     isDone: false,
-    list: "Self-care"
+    finishedDate: null 
   },
   {
     id: 5,
     task: "Submit expense report",
+    list: "Work",
     due: "2023-01-23",
     isDone: true,
-    list: "Work"
+    finishedDate: "2023-01-12"
   }
 ];
 
@@ -68,8 +74,16 @@ const taskReducer = (state, action) => {
     }
     case "TOGGLE_TASK": {
       const updatedTasks = state.tasks.map((task) =>
-        task.id === action.taskId ? { ...task, isDone: !task.isDone } : task
+        task.id === action.taskId
+          ? {
+              ...task,
+              isDone: !task.isDone,
+              finishedDate: task.isDone ? null : moment().format("YYYY-MM-DD"),
+            }
+          : task
       );
+
+      console.log(updatedTasks);
       
       return {
         ...state,

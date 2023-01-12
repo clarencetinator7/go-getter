@@ -1,0 +1,23 @@
+.empty-msg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 5em 0;
+}
+
+.message-wrapper {
+  text-align: center;
+}
+
+.message-wrapper .header {
+  font-weight: bold;
+  font-size: 2.5em;
+  color: var(--primary-text-color);
+}
+
+.message-wrapper .message {
+  font-size: 1.6em;
+  color: rgb(144, 144, 144);
+}

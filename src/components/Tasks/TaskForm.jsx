@@ -34,9 +34,10 @@ const TaskForm = (props) => {
     const newTask = {
       id: Math.random(),
       task: enteredTask,
+      list: props.isList ? props.listName : 'Inbox',
       due: enteredDate ? enteredDate : null,
       isDone: false,
-      list: props.isList ? props.listName : 'Inbox',
+      finishedDate: null,
     };
     
     taskCtx.addTask(newTask);
@@ -49,7 +50,7 @@ const TaskForm = (props) => {
   return (
     <form className={style['task-input__container']} onSubmit={onSubmitHandler}>
       <div className={`${style['input-wrapper']} ${style['text-wrapper']}`}>
-        <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder={props.isList ? `➕ Add new task in #${props.listName}` : `➕ Add new task`} />
+        <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder={props.isList ? `➕ Add new task in "${props.listName}"` : `➕ Add new task, press enter to submit.`} />
       </div>
       <div className={`${style['input-wrapper']} ${style['date-wrapper']}`}>
         <input type='date' value={enteredDate} onChange={onEnterDateHandler} min={moment().format('YYYY-MM-DD')}/>

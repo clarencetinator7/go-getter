@@ -36,8 +36,8 @@ const ListFilter = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if(enteredList){
-
+    if(enteredList.trim().length === 0){
+      return;
     }
 
     taskCtx.addList(enteredList)
