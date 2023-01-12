@@ -34,9 +34,10 @@ const TaskForm = (props) => {
     const newTask = {
       id: Math.random(),
       task: enteredTask,
+      list: props.isList ? props.listName : 'Inbox',
       due: enteredDate ? enteredDate : null,
       isDone: false,
-      list: props.isList ? props.listName : 'Inbox',
+      finishedDate: null,
     };
     
     taskCtx.addTask(newTask);
