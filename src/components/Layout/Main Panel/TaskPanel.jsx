@@ -25,7 +25,7 @@ const TaskPanel = (props) => {
     TODAY: {
       name: "🌞 Today",
       filterFn: (item) =>
-        moment(item.due).isSame(moment(), "day") || item.due === null && !item.isDone,
+        (moment(item.due).isSameOrBefore(moment(), "day") || item.due === null) && !item.isDone,
       filterDn: (item) => moment(item.finishedDate).isSame(moment(), "day") && item.isDone,
       isList: false,
       emptyMessage: {
@@ -83,6 +83,7 @@ const TaskPanel = (props) => {
     with the function provided in the 'filterFn'.
   */
   const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
+  console.log(filteredTasks);
   const finishedTasks = taskCtx.tasks.filter(filterDn);
   const isEmpty = filteredTasks.length === 0;
   const isFinEmpty = finishedTasks.length === 0;
