@@ -75,11 +75,11 @@ const TaskItem = props => {
           style={{ display: optionState ? "block" : "none" }}
         >
           <button type="button" className={style.deleteBtn} onClick={deleteTaskHandler}>
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faTrash} className={style.faIcon}/> Delete Task
           </button>
-          <button type="button" className={style.editBtn}>
+          {/* <button type="button" className={style.editBtn}>
             <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
+          </button> */}
         </div>
       </div>
     </li>

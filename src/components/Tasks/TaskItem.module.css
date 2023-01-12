@@ -56,9 +56,32 @@
   z-index: 5;
   bottom: -35px;
   right: 0;
-  width: 100px;
-  padding: 1em;
+  width: 150px;
+  /* padding: 1em; */
   border: solid 1px #ccc;
+  padding: 1em 0;
   border-radius: 3px;
   background-color: white;
+}
+
+.options .deleteBtn {
+  width: 100%;
+  padding: .5em;
+  font-size: 1.4em;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  border: none;
+  /* border-bottom: solid 1px #ccc; */
+  display: flex;
+  align-items: center;
+}
+
+.options .faIcon {
+  color: var(--secondary-text-color);
+  margin-right: .5em;
+  font-size: 1.1em;
+}
+
+.options button:hover {
+  background-color: rgb(241, 241, 241);
 }
