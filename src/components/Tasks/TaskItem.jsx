@@ -4,7 +4,7 @@ import moment from 'moment/moment';
 import style from './TaskItem.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faTrash, faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import TaskContext from '../Layout/Context/TaskContext';
 
 const TaskItem = props => {
@@ -12,6 +12,7 @@ const TaskItem = props => {
   const taskCtx = useContext(TaskContext)
 
   const [optionState, toggleOption] = useState(false);
+  const [listOptionState, toggleListOption] = useState(false);
 
   let formattedDue = '';
   const isOverdue = moment(props.due).isBefore(moment(), 'day');
@@ -71,15 +72,30 @@ const TaskItem = props => {
           className={style["options"]}
           onMouseLeave={() => {
             toggleOption(!optionState);
+            toggleListOption(false);
           }}
           style={{ display: optionState ? "block" : "none" }}
         >
-          <button type="button" className={style.deleteBtn} onClick={deleteTaskHandler}>
-            <FontAwesomeIcon icon={faTrash} className={style.faIcon}/> Delete Task
+          <button
+            type="button"
+            className={style.deleteBtn}
+            onClick={deleteTaskHandler}
+          >
+            <FontAwesomeIcon icon={faTrash} className={style.faIcon} /> Delete
+            Task
           </button>
-          {/* <button type="button" className={style.editBtn}>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button> */}
+          <div className={style["list-option"]} onClick={() => {toggleListOption(!listOptionState)}}>
+            <span className={style.addToListOpt}>
+              <FontAwesomeIcon icon={faChevronLeft} className={style.faIcon} />Add to list
+            </span>
+            <ul className={style["list"]} onMouseLeave={() => {toggleListOption(!listOptionState)}} style={{display: listOptionState ? "block" : "none"}}>
+              {taskCtx.lists.map((item) => (
+                <li key={item} id={item}>
+                  {`#${item}`}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </li>

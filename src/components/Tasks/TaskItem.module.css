@@ -64,19 +64,22 @@
   /* display: none; */
   position: absolute;
   z-index: 5;
-  bottom: -35px;
+  bottom: -110px;
   right: 0;
-  width: 150px;
-  /* padding: 1em; */
+  width: 180px;
   border: solid 1px #ccc;
   padding: 1em 0;
   border-radius: 3px;
   background-color: white;
 }
 
+.options button {
+  font-family: 'Poppins', sans-serif;
+}
+
 .options .deleteBtn {
   width: 100%;
-  padding: .5em;
+  padding: .8em 0 .8em 1.3em;
   font-size: 1.4em;
   background-color: transparent;
   color: var(--primary-text-color);
@@ -94,4 +97,39 @@
 
 .options button:hover {
   background-color: rgb(241, 241, 241);
+}
+
+.list-option {
+  position: relative;
+}
+
+.options .addToListOpt {
+  display: block;
+  padding: .8em 0 .8em 1.3em;
+  font-size: 1.4em;
+  color: var(--primary-text-color);
+  cursor: default;
+}
+
+.options .addToListOpt:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+.list-option .list {
+  /* display: none; */
+  padding: .5em 0;
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: calc(-150px);
+  width: 150px;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  max-height: 300px;
+}
+
+.list-option .list li {
+  font-size: 1.4em;
+  padding: .5em;
+  color: var(--primary-text-color);
 }
