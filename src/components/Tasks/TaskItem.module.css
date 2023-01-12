@@ -1,7 +1,8 @@
 .task-item {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 10px;
+  /* justify-content: space-between; */
   align-items: center;
   margin: 1em 0;
   height: 50px;
@@ -9,7 +10,11 @@
   padding: .5em 1em;
 }
 
-.task-item__wrapper input[type="checkbox"] {
+.task-item__main {
+  flex-grow: 1;
+}
+
+.task-item__main input[type="checkbox"] {
   margin-right: 2em;
   height: 16px;
   width: 16px;
@@ -18,7 +23,7 @@
   border: solid 2px var(--primary-text-color);
 }
 
-.task-item__wrapper label {
+.task-item__main label {
   font-size: 1.7em;
   color: var(--primary-text-color);
 }
@@ -29,7 +34,14 @@
   text-align: right;
 }
 
-
 .task-due__wrapper.overdue .due-txt{
   color: #e63946;
+}
+
+.task-item__options button {
+  border: none;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  font-size: 1.6em;
+  cursor: pointer;
 }

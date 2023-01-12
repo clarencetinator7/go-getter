@@ -3,6 +3,9 @@ import moment from 'moment/moment';
 
 import style from './TaskItem.module.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+
 const TaskItem = props => {
 
   let formattedDue = '';
@@ -19,9 +22,13 @@ const TaskItem = props => {
     }
   }
 
+  const optionButtonClickHandler = () => {
+    console.log(`Options clicked. Task: ${props.id}, ${props.task}`)
+  }
+
   return (
     <li className={style["task-item"]}>
-      <div className={style["task-item__wrapper"]}>
+      <div className={style["task-item__main"]}>
         <input
           type="checkbox"
           name={props.id}
@@ -38,6 +45,9 @@ const TaskItem = props => {
       >
         <span className={style['due-txt']}>{formattedDue}</span><br />
         <span>{`# ${props.list}`}</span>
+      </div>
+      <div className={style['task-item__options']}>
+        <button type='button' onClick={optionButtonClickHandler}><FontAwesomeIcon icon={faEllipsis} /></button>
       </div>
     </li>
   );
