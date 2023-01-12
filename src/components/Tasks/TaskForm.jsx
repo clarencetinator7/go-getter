@@ -49,7 +49,7 @@ const TaskForm = (props) => {
   return (
     <form className={style['task-input__container']} onSubmit={onSubmitHandler}>
       <div className={`${style['input-wrapper']} ${style['text-wrapper']}`}>
-        <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder={props.isList ? `➕ Add new task in #${props.listName}` : `➕ Add new task`} />
+        <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder={props.isList ? `➕ Add new task in "${props.listName}"` : `➕ Add new task, press enter to submit.`} />
       </div>
       <div className={`${style['input-wrapper']} ${style['date-wrapper']}`}>
         <input type='date' value={enteredDate} onChange={onEnterDateHandler} min={moment().format('YYYY-MM-DD')}/>

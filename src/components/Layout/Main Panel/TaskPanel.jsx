@@ -4,13 +4,16 @@ import FinishedTasksList from "../../Tasks/FinishedTasksList";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
 import TaskContext from "../Context/TaskContext";
+import EmptyState from "../Empty State/EmptyState";
+
+import  ListSvg from "../../../assets/states-svg/list.svg";
+import OrganizeSvg  from "../../../assets/states-svg/organize.svg";
+import RelaxSvg from "../../../assets/states-svg/relax.svg";
 
 import style from './TaskPanel.module.css';
 
 const TaskPanel = (props) => {
   const taskCtx = useContext(TaskContext);
-
-  let listName = "";
 
   let finishedTasks = taskCtx.tasks.filter((item) => {
     return item.isDone;
@@ -22,23 +25,43 @@ const TaskPanel = (props) => {
     TODAY: {
       name: "🌞 Today",
       filterFn: (item) =>
-        moment(item.due).isSame(moment(), "day") || item.due === null,
+        moment(item.due).isSame(moment(), "day") || item.due === null && !item.isDone,
       isList: false,
+      emptyMessage: {
+        svg: <img src={RelaxSvg} alt="Relax Img" className={style['list-empty-icon']} />,
+        header: 'No tasks for today?',
+        message: 'Sit back and enjoy a break, you deserve it.'
+      }
     },
     INBOX: {
       name: "📥 Inbox",
-      filterFn: () => true,
+      filterFn: (item) => item.list === 'Inbox' && !item.isDone,
       isList: false,
+      emptyMessage: {
+        svg: <img src={OrganizeSvg} alt="Relax Img" className={style['list-empty-icon']}/>,
+        header: 'No tasks in your inbox',
+        message: 'Great job on keeping your tasks organized!'
+      }
     },
     NEXTWEEK: {
       name: "📅 Next Week",
-      filterFn: (item) => moment(item.due).isAfter(moment(), "week"),
+      filterFn: (item) => moment(item.due).isAfter(moment(), "week") && !item.isDone,
       isList: false,
+      emptyMessage: {
+        svg: <img src={RelaxSvg} alt="Relax Img" className={style['list-empty-icon']}/>,
+        header: 'No tasks scheduled for next week',
+        message: 'you must be ahead of schedule!'
+      }
     },
     custom: {
       name: `#${props.displayed}`, 
-      filterFn: (item) => item.list === props.displayed,
+      filterFn: (item) => item.list === props.displayed && !item.isDone,
       isList: true,
+      emptyMessage: {
+        svg: <img src={ListSvg} alt="Relax Img" className={style['list-empty-icon']}/>, 
+        header: `No tasks on this list`,
+        message: 'Use list to categorize your tasks and keep it organized.'
+      }
     },
   };
 
@@ -49,13 +72,14 @@ const TaskPanel = (props) => {
       filterFn: function used to filter the tasks.
       isList: it tells if the task displayed is based on a 'custom created list'
   */
-  const { name, filterFn, isList } =
+  const { name, filterFn, isList, emptyMessage } =
     listType[props.displayed] || listType.custom;
   /* 
     After defining the list type, It will filter the tasks from the TaskContext
     with the function provided in the 'filterFn'.
   */
   const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
+  const isEmpty = filteredTasks.length === 0;
 
   return (
     <main className={style["main-content"]}>
@@ -63,9 +87,13 @@ const TaskPanel = (props) => {
         <div className={style["main-content__header"]}>
           <span className="content-title">{name}</span>
         </div>
-        <TaskForm isList={isList} listName={name} />
+        <TaskForm isList={isList} listName={props.displayed} />
         <div className={style["task-container"]}>
-          <TaskList displayedTasks={filteredTasks} />
+          {isEmpty ? (
+            <EmptyState emptyMessage={emptyMessage} />
+          ) : (
+            <TaskList displayedTasks={filteredTasks} />
+          )}
           <FinishedTasksList finishedTasks={finishedTasks} />
         </div>
       </div>
