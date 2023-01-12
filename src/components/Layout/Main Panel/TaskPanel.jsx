@@ -15,9 +15,9 @@ import style from './TaskPanel.module.css';
 const TaskPanel = (props) => {
   const taskCtx = useContext(TaskContext);
 
-  let finishedTasks = taskCtx.tasks.filter((item) => {
-    return item.isDone;
-  });
+  // let finishedTasks = taskCtx.tasks.filter((item) => {
+  //   return item.isDone;
+  // });
 
   console.log("Re-render Task Panel");
 
@@ -26,6 +26,7 @@ const TaskPanel = (props) => {
       name: "🌞 Today",
       filterFn: (item) =>
         moment(item.due).isSame(moment(), "day") || item.due === null && !item.isDone,
+      filterDn: (item) => moment(item.finishedDate).isSame(moment(), "day") && item.isDone,
       isList: false,
       emptyMessage: {
         svg: <img src={RelaxSvg} alt="Relax Img" className={style['list-empty-icon']} />,
@@ -36,6 +37,7 @@ const TaskPanel = (props) => {
     INBOX: {
       name: "📥 Inbox",
       filterFn: (item) => item.list === 'Inbox' && !item.isDone,
+      filterDn: (item) => item.list === 'Inbox' && item.isDone && moment(item.finishedDate).isAfter(moment().subtract(7, 'days')),
       isList: false,
       emptyMessage: {
         svg: <img src={OrganizeSvg} alt="Relax Img" className={style['list-empty-icon']}/>,
@@ -46,6 +48,7 @@ const TaskPanel = (props) => {
     NEXTWEEK: {
       name: "📅 Next Week",
       filterFn: (item) => moment(item.due).isAfter(moment(), "week") && !item.isDone,
+      filterDn: (item) => item.isDone,
       isList: false,
       emptyMessage: {
         svg: <img src={RelaxSvg} alt="Relax Img" className={style['list-empty-icon']}/>,
@@ -56,6 +59,7 @@ const TaskPanel = (props) => {
     custom: {
       name: `#${props.displayed}`, 
       filterFn: (item) => item.list === props.displayed && !item.isDone,
+      filterDn: (item) => item.list === props.displayed && item.isDone,
       isList: true,
       emptyMessage: {
         svg: <img src={ListSvg} alt="Relax Img" className={style['list-empty-icon']}/>, 
@@ -72,14 +76,16 @@ const TaskPanel = (props) => {
       filterFn: function used to filter the tasks.
       isList: it tells if the task displayed is based on a 'custom created list'
   */
-  const { name, filterFn, isList, emptyMessage } =
+  const { name, filterFn, filterDn, isList, emptyMessage } =
     listType[props.displayed] || listType.custom;
   /* 
     After defining the list type, It will filter the tasks from the TaskContext
     with the function provided in the 'filterFn'.
   */
   const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
+  const finishedTasks = taskCtx.tasks.filter(filterDn);
   const isEmpty = filteredTasks.length === 0;
+  const isFinEmpty = finishedTasks.length === 0;
 
   return (
     <main className={style["main-content"]}>
@@ -94,7 +100,7 @@ const TaskPanel = (props) => {
           ) : (
             <TaskList displayedTasks={filteredTasks} />
           )}
-          <FinishedTasksList finishedTasks={finishedTasks} />
+          {!isFinEmpty && <FinishedTasksList finishedTasks={finishedTasks} />}
         </div>
       </div>
     </main>
