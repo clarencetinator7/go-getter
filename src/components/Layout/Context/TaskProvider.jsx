@@ -97,6 +97,16 @@ const taskReducer = (state, action) => {
         lists: updatedList
       }
     }
+    case "CHANGE_LIST": {
+      // const taskIndex = state.tasks.findIndex(task => task.id === action.taskId);
+      const updatedTasks = state.tasks.map((task) =>
+        task.id === action.taskId ? { ...task, list: action.newList } : task 
+      );
+      return {
+        ...state,
+        tasks: updatedTasks
+      }
+    }
     default:
       console.log(`default`);
       return state;
@@ -143,6 +153,10 @@ const TaskProvider = props => {
     taskDispatchAction({type: 'ADD_LIST', newList: newList})
   }
 
+  const changeListHandler = (taskId, list) => {
+    taskDispatchAction({type: 'CHANGE_LIST', newList: list, taskId: taskId})
+  }
+
   const taskContext = {
     tasks: taskState.tasks,
     lists: taskState.lists,
@@ -151,6 +165,7 @@ const TaskProvider = props => {
     toggleTask: toggleTaskHandler,
     getSortedTasks: sortTaskHandler, 
     addList: addListHandler,
+    changeList: changeListHandler,
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;

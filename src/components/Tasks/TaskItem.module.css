@@ -108,7 +108,8 @@
   padding: .8em 0 .8em 1.3em;
   font-size: 1.4em;
   color: var(--primary-text-color);
-  cursor: default;
+  cursor: pointer;
+
 }
 
 .options .addToListOpt:hover {
@@ -126,10 +127,16 @@
   border: solid 1px #ccc;
   border-radius: 3px;
   max-height: 300px;
+  background-color: white;
 }
 
 .list-option .list li {
   font-size: 1.4em;
   padding: .5em;
   color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.list-option .list li:hover {
+  background-color: rgb(241, 241, 241);
 }

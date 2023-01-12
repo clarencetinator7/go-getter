@@ -76,6 +76,18 @@ const TaskItem = props => {
           }}
           style={{ display: optionState ? "block" : "none" }}
         >
+          <div className={style["list-option"]} onClick={() => {toggleListOption(!listOptionState)}}>
+            <span className={style.addToListOpt}>
+              <FontAwesomeIcon icon={faChevronLeft} className={style.faIcon} />Add to list
+            </span>
+            <ul className={style["list"]} onMouseLeave={() => {toggleListOption(!listOptionState)}} style={{display: listOptionState ? "block" : "none"}}>
+              {taskCtx.lists.map((item) => (
+                <li key={item} id={item} onClick={() => {taskCtx.changeList(props.id, item)}}>
+                  {`#${item}`}
+                </li>
+              ))}
+            </ul>
+          </div>
           <button
             type="button"
             className={style.deleteBtn}
@@ -84,18 +96,6 @@ const TaskItem = props => {
             <FontAwesomeIcon icon={faTrash} className={style.faIcon} /> Delete
             Task
           </button>
-          <div className={style["list-option"]} onClick={() => {toggleListOption(!listOptionState)}}>
-            <span className={style.addToListOpt}>
-              <FontAwesomeIcon icon={faChevronLeft} className={style.faIcon} />Add to list
-            </span>
-            <ul className={style["list"]} onMouseLeave={() => {toggleListOption(!listOptionState)}} style={{display: listOptionState ? "block" : "none"}}>
-              {taskCtx.lists.map((item) => (
-                <li key={item} id={item}>
-                  {`#${item}`}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </li>
