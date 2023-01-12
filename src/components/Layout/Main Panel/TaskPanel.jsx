@@ -8,51 +8,62 @@ import TaskContext from "../Context/TaskContext";
 import style from './TaskPanel.module.css';
 
 const TaskPanel = (props) => {
-  
   const taskCtx = useContext(TaskContext);
-  let filteredTasks = taskCtx.tasks;
 
-  let isList = false;
-  let listName = '';
+  let listName = "";
 
   let finishedTasks = taskCtx.tasks.filter((item) => {
     return item.isDone;
   });
 
+  console.log("Re-render Task Panel");
 
-  if(props.displayed === 'TODAY') {
-    listName = '🌞 Today'
-    filteredTasks = taskCtx.getSortedTasks().filter(item => {
-      return moment(item.due).isSame(moment(), 'day') || item.due === null;
-    });
-  } else if(props.displayed === 'INBOX') {
-    listName = '📥 Inbox'
-    filteredTasks = taskCtx.getSortedTasks();
-  } else if(props.displayed === 'NEXTWEEK') {
-    listName = '📅 Next Week'
-    filteredTasks = taskCtx.getSortedTasks().filter(item => {
-      return moment(item.due).isAfter(moment(), 'week')
-    });
-  } else {
-    isList = true;
-    listName = props.displayed
-    filteredTasks = taskCtx.getSortedTasks().filter(item => {
-      return item.list === props.displayed;
-    })
-    finishedTasks = finishedTasks.filter((item) => {
-      return item.list === props.displayed;
-    })
-  }
+  const listType = {
+    TODAY: {
+      name: "🌞 Today",
+      filterFn: (item) =>
+        moment(item.due).isSame(moment(), "day") || item.due === null,
+      isList: false,
+    },
+    INBOX: {
+      name: "📥 Inbox",
+      filterFn: () => true,
+      isList: false,
+    },
+    NEXTWEEK: {
+      name: "📅 Next Week",
+      filterFn: (item) => moment(item.due).isAfter(moment(), "week"),
+      isList: false,
+    },
+    custom: {
+      name: `#${props.displayed}`, 
+      filterFn: (item) => item.list === props.displayed,
+      isList: true,
+    },
+  };
+
+  /* 
+    This selects an object from the listType depending on props.displayed
+    The object will be destructured into 3 variables:
+      name: the name of the list.
+      filterFn: function used to filter the tasks.
+      isList: it tells if the task displayed is based on a 'custom created list'
+  */
+  const { name, filterFn, isList } =
+    listType[props.displayed] || listType.custom;
+  /* 
+    After defining the list type, It will filter the tasks from the TaskContext
+    with the function provided in the 'filterFn'.
+  */
+  const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
 
   return (
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
         <div className={style["main-content__header"]}>
-          <span className="content-title">{`${
-            isList ? "#️" : ""
-          } ${listName}:`}</span>
+          <span className="content-title">{name}</span>
         </div>
-        <TaskForm isList={isList} listName={listName} />
+        <TaskForm isList={isList} listName={name} />
         <div className={style["task-container"]}>
           <TaskList displayedTasks={filteredTasks} />
           <FinishedTasksList finishedTasks={finishedTasks} />
