@@ -4,10 +4,20 @@
   gap: 10px;
   /* justify-content: space-between; */
   align-items: center;
-  margin: 1em 0;
+  /* margin: 1em 0; */
   height: 50px;
   border-bottom: solid 1px #eeeeee;
-  padding: .5em 1em;
+  padding: 3em 1em;
+}
+
+.task-item:hover {
+  background-color: rgb(246, 246, 246);
+  border-radius: 5px;
+  border: transparent;
+}
+
+.task-item:hover .task-item__options-wrapper .optionsBtn {
+  color: var(--primary-text-color);
 }
 
 .task-item__main {
