@@ -48,11 +48,15 @@ const TaskPanel = (props) => {
     <main className={style["main-content"]}>
       <div className={style["content-container"]}>
         <div className={style["main-content__header"]}>
-          <span className="content-title">{`${isList ? '#️' : ''} ${listName}:`}</span>
+          <span className="content-title">{`${
+            isList ? "#️" : ""
+          } ${listName}:`}</span>
         </div>
-        <TaskForm isList={isList} listName={listName}/>
-        <TaskList displayedTasks={filteredTasks}/>
-        <FinishedTasksList finishedTasks={finishedTasks} />
+        <TaskForm isList={isList} listName={listName} />
+        <div className={style["task-container"]}>
+          <TaskList displayedTasks={filteredTasks} />
+          <FinishedTasksList finishedTasks={finishedTasks} />
+        </div>
       </div>
     </main>
   );
