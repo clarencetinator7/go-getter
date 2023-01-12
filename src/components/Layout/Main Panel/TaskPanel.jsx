@@ -1,5 +1,5 @@
 import moment from "moment/moment";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import FinishedTasksList from "../../Tasks/FinishedTasksList";
 import TaskForm from "../../Tasks/TaskForm";
 import TaskList from "../../Tasks/TaskList";
@@ -14,12 +14,6 @@ import style from './TaskPanel.module.css';
 
 const TaskPanel = (props) => {
   const taskCtx = useContext(TaskContext);
-
-  // let finishedTasks = taskCtx.tasks.filter((item) => {
-  //   return item.isDone;
-  // });
-
-  console.log("Re-render Task Panel");
 
   const listType = {
     TODAY: {
@@ -83,7 +77,6 @@ const TaskPanel = (props) => {
     with the function provided in the 'filterFn'.
   */
   const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
-  console.log(filteredTasks);
   const finishedTasks = taskCtx.tasks.filter(filterDn);
   const isEmpty = filteredTasks.length === 0;
   const isFinEmpty = finishedTasks.length === 0;
