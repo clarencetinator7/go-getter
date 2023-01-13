@@ -82,8 +82,8 @@ const TaskItem = props => {
             </span>
             <ul className={style["list"]} onMouseLeave={() => {toggleListOption(!listOptionState)}} style={{display: listOptionState ? "block" : "none"}}>
               {taskCtx.lists.map((item) => (
-                <li key={item} id={item} onClick={() => {taskCtx.changeList(props.id, item)}}>
-                  {`#${item}`}
+                <li key={item.id} id={item.id} onClick={() => {taskCtx.changeList(props.id, item.list)}}>
+                  {`#${item.list}`}
                 </li>
               ))}
             </ul>

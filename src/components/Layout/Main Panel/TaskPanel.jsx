@@ -76,8 +76,8 @@ const TaskPanel = (props) => {
     After defining the list type, It will filter the tasks from the TaskContext
     with the function provided in the 'filterFn'.
   */
-  const filteredTasks = taskCtx.getSortedTasks().filter(filterFn);
-  const finishedTasks = taskCtx.tasks.filter(filterDn);
+  const filteredTasks = taskCtx.getTasks.todo.filter(filterFn);
+  const finishedTasks = taskCtx.getTasks.done.filter(filterDn);
   const isEmpty = filteredTasks.length === 0;
   const isFinEmpty = finishedTasks.length === 0;
 

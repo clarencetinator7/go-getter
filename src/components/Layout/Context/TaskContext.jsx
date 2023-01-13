@@ -6,7 +6,7 @@ const TaskContext = React.createContext({
   addTask: (newTask) => {},
   deleteTask: (taskId) => {},
   toggleTask: (taskId) => {},
-  getSortedTasks: () => {},
+  getTasks: {},
   addList: (list) => {},
   changeList: (id, list) => {},
   deleteList: (listId) => {}

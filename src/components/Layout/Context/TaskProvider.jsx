@@ -95,8 +95,6 @@ const taskReducer = (state, action) => {
           : task
       );
 
-      console.log(updatedTasks);
-      
       return {
         ...state,
         tasks: updatedTasks
@@ -117,7 +115,6 @@ const taskReducer = (state, action) => {
       }
     }
     case "CHANGE_LIST": {
-      // const taskIndex = state.tasks.findIndex(task => task.id === action.taskId);
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId ? { ...task, list: action.newList } : task 
       );
@@ -166,9 +163,18 @@ const TaskProvider = props => {
     return [...overdueTasks, ...noDueTasks, ...sortedTasks];
   };
 
+  //sort function for finished tasks
+  const sortFinishedTasks = (tasks) => {
+    const sortedTasks = tasks
+      .filter((task) => task.isDone === true)
+      .sort((a, b) => new Date(b.finishedDate) - new Date(a.finishedDate));
+    return sortedTasks;
+  };
+
   const sortTaskHandler = () => {
-    const sortedTask = sortTasks(taskState.tasks);
-    return sortedTask;
+    const todoTasks = sortTasks(taskState.tasks.filter((task) => task.isDone === false));
+    const doneTasks = sortFinishedTasks(taskState.tasks);
+    return {todo: todoTasks, done: doneTasks};
   }
 
   const addListHandler = (newList) => {
@@ -182,14 +188,14 @@ const TaskProvider = props => {
   const deleterListHandler = (listId) => {
     taskDispatchAction({type: 'DELETE_LIST', listId: listId})
   }
-
+  
   const taskContext = {
     tasks: taskState.tasks,
     lists: taskState.lists,
     addTask: addTaskHandler,
     deleteTask: deleteTaskHandler,
     toggleTask: toggleTaskHandler,
-    getSortedTasks: sortTaskHandler, 
+    getTasks: sortTaskHandler(),
     addList: addListHandler,
     changeList: changeListHandler,
     deleterList: deleterListHandler,
