@@ -74,9 +74,14 @@ const taskReducer = (state, action) => {
       // it creates a new array with the existing tasks and the new task
       // it then returns a new state object with the updated tasks
       const updatedTasks = [...state.tasks, action.newTask];
+
+      const listName = action.newTask.list;
+
+      const updatedLists = state.lists.map(list => list.list === listName ? {...list, tasksCount: list.tasksCount + 1} : list);
+
       return {
-        ...state,
         tasks: updatedTasks,
+        lists: updatedLists,
       };
     }
     case "DELETE_TASK": {
@@ -90,6 +95,43 @@ const taskReducer = (state, action) => {
       }
     }
     case "TOGGLE_TASK": {
+      // let updatedLists = {};
+
+      /* THIS IS MY FIRST SOLUTION IN COUNTING AND UPDATING THE TASK */
+      /* DONT REMOVE FOR EDUCTATIONAL PURPOSES */
+
+      // const updatedTasks = state.tasks.map((task) => {
+      //   if (task.id === action.taskId) {
+      //     const taskUpdate =  {
+      //       ...task,
+      //       isDone: !task.isDone,
+      //       finishedDate: task.isDone ? null : moment().format("YYYY-MM-DD"),
+      //     }
+
+      //     // Get the listName of the updated task
+      //     const listName = taskUpdate.list;
+      //     // Map through the state.lists and look for the specific list
+      //     // to update the count if the task is toggled.
+      //     // to only count the UNFINISHED TASKS
+      //     updatedLists = state.lists.map((list) =>
+      //       // If it matches list name and it already has a 'finishedDate'
+      //       // (It indicates that the task is DONE)
+      //       // if so, it decrements the task count on the given list
+      //       listName === list.list && taskUpdate.finishedDate
+      //         ? { ...list, tasksCount: list.tasksCount - 1 }
+      //       //If the task's finishedDate is set to 'null'
+      //       //Increment the count
+      //         : listName === list.list && !taskUpdate.finishedDate
+      //         ? { ...list, tasksCount: list.tasksCount + 1 }
+      //         : list
+      //     );
+
+      //     return taskUpdate;
+      //   } else {
+      //     return task;
+      //   }
+      // });
+
       // it creates a new array with the existing tasks
       // it maps through the tasks array and if the task id matches the taskId
       // it modifies the task object with the new 'isDone' value based on the reverse of the current value
@@ -103,14 +145,24 @@ const taskReducer = (state, action) => {
           : task
       );
 
+      // Get the list name of the updated task from 'updatedTasks' arr
+      const listName = updatedTasks.find(task => task.id === action.taskId).list;
+      // Count the finished task with the same listName
+      const tasksCount = updatedTasks.filter(task => task.list === listName && !task.isDone).length;
+      // Update the taskCount of the list
+      const updatedLists = state.lists.map(item => item.list === listName ? {...item, tasksCount: tasksCount} : item);
+
       return {
-        ...state,
-        tasks: updatedTasks
+        tasks: updatedTasks,
+        lists: updatedLists,
       }
     }
     case "ADD_LIST": {
       // similar to ADD_TASK
-      const updatedList = [...state.lists, action.newList];
+
+      const newList = { ...action.newList, tasksCount: 0 };
+
+      const updatedList = [...state.lists, newList];
       return {
         ...state,
         lists: updatedList

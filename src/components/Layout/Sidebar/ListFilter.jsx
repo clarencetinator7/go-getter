@@ -35,6 +35,12 @@ const ListFilter = (props) => {
     setEnteredList(e.target.value.replace(/\s/g, '-'));
   };
 
+  // get the taskCount from taskCtx.lists with the provided list name
+  const getTaskCount = (listId) => {
+    const list = taskCtx.lists.find(item => item.id === listId);
+    return list.tasksCount;
+  }
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     // Check if list is empty
@@ -65,12 +71,16 @@ const ListFilter = (props) => {
     return (
       <li key={item.id} className={style["list-item"]}>
         <span
+          className={style["list-name"]}
           id={item.id}
-          onClick={(e) => {
+          onClick={() => {
             props.setDisplay(item.list);
           }}
         >
           {`# ${item.list}`}
+        </span>
+        <span className={style.count}>
+          {getTaskCount(item.id) === 0 ? "" : getTaskCount(item.id)}
         </span>
         <button
           type="button"

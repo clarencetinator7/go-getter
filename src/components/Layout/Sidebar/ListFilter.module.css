@@ -43,6 +43,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .task-list .lists li:hover {
@@ -53,8 +54,14 @@
   background-color: var(--secondary-faded-color);
 }
 
-.lists .list-item span {
+.lists .list-item .list-name {
   flex-grow: 1;
+}
+
+.list-item .count {
+  font-weight: bold;
+  font-size: .9em;
+  color: var(--secondary-text-color);
 }
 
 .lists .list-item:hover button {
@@ -67,6 +74,7 @@
   border: none;
   color: var(--secondary-text-color);
   font-size: 1em;
+  margin-left: .5em;
   cursor: pointer;
   transition: .200s ease;
 }
