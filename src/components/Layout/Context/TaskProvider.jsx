@@ -71,6 +71,8 @@ const defaultTaskState = {
 const taskReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK": {
+      // it creates a new array with the existing tasks and the new task
+      // it then returns a new state object with the updated tasks
       const updatedTasks = [...state.tasks, action.newTask];
       return {
         ...state,
@@ -78,6 +80,9 @@ const taskReducer = (state, action) => {
       };
     }
     case "DELETE_TASK": {
+      // it creates a new array with the existing tasks
+      // except the one with the it that matches the taskId
+      // it then returns a new state object with the updated tasks
       const updatedTask = state.tasks.filter(task => action.taskId !== task.id);
       return {
         ...state,
@@ -85,6 +90,9 @@ const taskReducer = (state, action) => {
       }
     }
     case "TOGGLE_TASK": {
+      // it creates a new array with the existing tasks
+      // it maps through the tasks array and if the task id matches the taskId
+      // it modifies the task object with the new 'isDone' value based on the reverse of the current value
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId
           ? {
@@ -101,6 +109,7 @@ const taskReducer = (state, action) => {
       }
     }
     case "ADD_LIST": {
+      // similar to ADD_TASK
       const updatedList = [...state.lists, action.newList];
       return {
         ...state,
@@ -108,6 +117,7 @@ const taskReducer = (state, action) => {
       }
     }
     case "DELETE_LIST": {
+      // similar to DELETE_TASK
       const updatedList = state.lists.filter(list => action.listId !== list.id);
       return {
         ...state,
@@ -115,6 +125,8 @@ const taskReducer = (state, action) => {
       }
     }
     case "CHANGE_LIST": {
+      // It maps through the tasks array and if the task id matches the taskId
+      // it modifies the task object with the new 'list' value based on the action.newList
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId ? { ...task, list: action.newList } : task 
       );
