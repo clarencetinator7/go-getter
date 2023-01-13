@@ -130,9 +130,22 @@ const taskReducer = (state, action) => {
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId ? { ...task, list: action.newList } : task 
       );
+      // Update the taskCount for the list
+      // it has bugs it adds 2 to the taskCount
+
+      const updatedLists = state.lists.map((list) =>
+        list.list === action.newList
+          ? { ...list, tasksCount: list.tasksCount + 1 }
+          : list.list === action.currList
+          ? { ...list, tasksCount: list.tasksCount - 1 }
+          : list
+      );
+      //print out the updated lists
+      console.log(updatedLists);
+
       return {
-        ...state,
-        tasks: updatedTasks
+        tasks: updatedTasks,
+        lists: updatedLists
       }
     }
     default:
@@ -193,8 +206,8 @@ const TaskProvider = props => {
     taskDispatchAction({type: 'ADD_LIST', newList: newList})
   }
 
-  const changeListHandler = (taskId, list) => {
-    taskDispatchAction({type: 'CHANGE_LIST', newList: list, taskId: taskId})
+  const changeListHandler = (taskId, list, currList) => {
+    taskDispatchAction({type: 'CHANGE_LIST', newList: list, taskId: taskId, currList: currList})
   }
 
   const deleterListHandler = (listId) => {
