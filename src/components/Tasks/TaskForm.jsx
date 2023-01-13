@@ -1,4 +1,4 @@
-import moment from 'moment/moment';
+import moment, { isMoment } from 'moment/moment';
 import React, { useContext, useState } from 'react';
 import TaskContext from '../Layout/Context/TaskContext';
 
@@ -25,17 +25,13 @@ const TaskForm = (props) => {
     if (enteredTask.trim().length === 0) {
       console.log("PLEASE ENTER A TASK");
       return;
-      /* 
-        TODO: 
-        ADD EMPTY INPUT WARNING.
-      */
     }
 
     const newTask = {
       id: Math.random(),
       task: enteredTask,
       list: props.isList ? props.listName : 'Inbox',
-      due: enteredDate ? enteredDate : null,
+      due: enteredDate ? enteredDate : !props.isList && props.listName === 'TODAY' ? moment().format('YYYY-MM-DD') : null,
       isDone: false,
       finishedDate: null,
     };
@@ -46,16 +42,41 @@ const TaskForm = (props) => {
     setEnteredDate('');
 
   }
- 
+
+  
+  const listNameToTitleCase = props.listName.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  
+  let inputPlaceholder = `➕ Add new task, press Enter to submit.`;
+
+  if(props.isList) {
+    inputPlaceholder = `➕ Add new task in "#${props.listName}", press Enter to submit.`
+  } else if (props.listName === 'TODAY') {
+    inputPlaceholder = `➕ Add new task in "${listNameToTitleCase}", press Enter to submit.`
+  }
+  
   return (
-    <form className={style['task-input__container']} onSubmit={onSubmitHandler}>
-      <div className={`${style['input-wrapper']} ${style['text-wrapper']}`}>
-        <input type='text' value={enteredTask} onChange={onEnterTaskHandler} placeholder={props.isList ? `➕ Add new task in "${props.listName}"` : `➕ Add new task, press enter to submit.`} />
+    <form className={style["task-input__container"]} onSubmit={onSubmitHandler}>
+      <div className={`${style["input-wrapper"]} ${style["text-wrapper"]}`}>
+        <input
+          type="text"
+          value={enteredTask}
+          onChange={onEnterTaskHandler}
+          placeholder={inputPlaceholder}
+        />
       </div>
-      <div className={`${style['input-wrapper']} ${style['date-wrapper']}`}>
-        <input type='date' value={enteredDate} onChange={onEnterDateHandler} min={moment().format('YYYY-MM-DD')}/>
+      <div className={`${style["input-wrapper"]} ${style["date-wrapper"]}`}>
+        <input
+          type="date"
+          value={
+            props.listName !== "TODAY"
+              ? enteredDate
+              : moment().format("YYYY-MM-DD")
+          }
+          onChange={onEnterDateHandler}
+          min={moment().format("YYYY-MM-DD")}
+        />
       </div>
-      <button type='submit' hidden/>
+      <button type="submit" hidden />
     </form>
   );
 }

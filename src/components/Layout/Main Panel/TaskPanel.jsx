@@ -87,7 +87,7 @@ const TaskPanel = (props) => {
         <div className={style["main-content__header"]}>
           <span className="content-title">{name}</span>
         </div>
-        <TaskForm isList={isList} listName={props.displayed} />
+        {props.displayed !== 'NEXTWEEK' && <TaskForm isList={isList} listName={props.displayed} />}
         <div className={style["task-container"]}>
           {isEmpty ? (
             <EmptyState emptyMessage={emptyMessage} />

@@ -56,9 +56,7 @@ const Sidebar = (props) => {
           }}
         >
           <span className={style["nav-link"]}>
-            {faIcons.calendarWeek}
-            Next 7 Days
-          </span>
+            {faIcons.calendarWeek} Upcoming </span>
         </li>
       </ul>
       <ListFilter setDisplay={props.setDisplay}/>
