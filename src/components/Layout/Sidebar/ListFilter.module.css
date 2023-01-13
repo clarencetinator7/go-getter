@@ -41,6 +41,8 @@
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 .task-list .lists li:hover {
@@ -50,6 +52,30 @@
 .task-list .list li.active {
   background-color: var(--secondary-faded-color);
 }
+
+.lists .list-item span {
+  flex-grow: 1;
+}
+
+.lists .list-item:hover button {
+  display: block;
+}
+
+.lists .list-item button {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--secondary-text-color);
+  font-size: 1em;
+  cursor: pointer;
+  transition: .200s ease;
+}
+
+.list-item button:hover {
+  color: var(--primary-text-color);
+}
+
+
 
 .input-wrapper {
   color: var(--secondary-text-color);

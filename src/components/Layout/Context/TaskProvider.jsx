@@ -117,10 +117,23 @@ const taskReducer = (state, action) => {
       }
     }
     case "DELETE_LIST": {
+      //Get the list name using the listId
+      //It maps through the lists array and if the list id matches the action.listId
+      const listName = state.lists.find(list => list.id === action.listId).list;
+
       // similar to DELETE_TASK
       const updatedList = state.lists.filter(list => action.listId !== list.id);
+
+      //Delete all the tasks that belong to the list with the listName
+      const updatedTasks = state.tasks.filter(task => task.list !== listName);
+
+      //Update all the tasks that belong to the list with the listName
+      //Change it to the default list 'Inbox'
+      // const updatedTasks = state.tasks.map((task) =>
+      //   task.list === listName ? { ...task, list: "Inbox" } : task );
+
       return {
-        ...state,
+        tasks: updatedTasks,
         lists: updatedList
       }
     }
@@ -224,7 +237,7 @@ const TaskProvider = props => {
     getTasks: sortTaskHandler(),
     addList: addListHandler,
     changeList: changeListHandler,
-    deleterList: deleterListHandler,
+    deleteList: deleterListHandler,
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;

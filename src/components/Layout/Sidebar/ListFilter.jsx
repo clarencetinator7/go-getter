@@ -6,11 +6,12 @@ import TaskContext from "../Context/TaskContext";
 
 /* FONT AWESOME IMPORTS */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 const faIcons = {
   chevronDown: (
     <FontAwesomeIcon icon={faChevronDown} className={style["drop-icon"]} />
   ),
+  trash: <FontAwesomeIcon icon={faTrash} className={style["trash-icon"]} />,
 };
 
 const ListFilter = (props) => {
@@ -18,6 +19,7 @@ const ListFilter = (props) => {
 
   const [isListOpen, setIsListOpen] = useState(false);
   const [enteredList, setEnteredList] = useState('');
+  const [isListExists, setIsListExists] = useState(false);
 
   const onClickHandler = () => {
     setIsListOpen((prevState) => {
@@ -35,10 +37,22 @@ const ListFilter = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+    // Check if list is empty
     if(enteredList.trim().length === 0){
       return;
     }
+
+    //check if list already exists
+    //case sensitive
+    const listExists = taskCtx.lists.find(item => item.list.toLowerCase() === enteredList.toLowerCase());
+    if(listExists){
+      setIsListExists(true);
+      setTimeout(() => {
+        setIsListExists(false);
+      }, 2000);
+      return;
+    }
+
 
     taskCtx.addList({
       id: Math.random().toString(),
@@ -49,15 +63,24 @@ const ListFilter = (props) => {
 
   const displayList = taskCtx.lists.map((item) => {
     return (
-      <li
-        key={item.id}
-        id={item.id}
-        className={style["list-item"]}
-        onClick={(e) => {
-          props.setDisplay(item.list);
-        }}
-      >
-        {`# ${item.list}`}
+      <li key={item.id} className={style["list-item"]}>
+        <span
+          id={item.id}
+          onClick={(e) => {
+            props.setDisplay(item.list);
+          }}
+        >
+          {`# ${item.list}`}
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            taskCtx.deleteList(item.id);
+            props.setDisplay("INBOX");
+          }}
+        >
+          {faIcons.trash}
+        </button>
       </li>
     );
   });
@@ -76,8 +99,15 @@ const ListFilter = (props) => {
         {displayList}
         <form className={style["input-wrapper"]} onSubmit={onSubmitHandler}>
           <span># </span>
-          <input type="text" onChange={onEnterListHandler} value={enteredList} placeholder="Click-to-add-list" />
+          <input
+            type="text"
+            onChange={onEnterListHandler}
+            value={enteredList}
+            placeholder="Click-to-add-list"
+          />
         </form>
+          {isListExists && <p className={style["error-text"]}>List already exists</p>}
+
       </ul>
     </div>
   );
