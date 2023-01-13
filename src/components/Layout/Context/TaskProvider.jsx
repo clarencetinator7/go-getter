@@ -131,8 +131,11 @@ const taskReducer = (state, action) => {
         task.id === action.taskId ? { ...task, list: action.newList } : task 
       );
       // Update the taskCount for the list
-      // it has bugs it adds 2 to the taskCount
-
+      // It maps through the lists array and if the list name matches the action.newList
+      // it modifies the list object with the new 'tasksCount' value based on the current value + 1
+      // if the list name matches the action.currList
+      // it modifies the list object with the new 'tasksCount' value based on the current value - 1
+      // otherwise it returns the list object as is
       const updatedLists = state.lists.map((list) =>
         list.list === action.newList
           ? { ...list, tasksCount: list.tasksCount + 1 }
@@ -140,8 +143,6 @@ const taskReducer = (state, action) => {
           ? { ...list, tasksCount: list.tasksCount - 1 }
           : list
       );
-      //print out the updated lists
-      console.log(updatedLists);
 
       return {
         tasks: updatedTasks,

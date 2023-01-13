@@ -3,16 +3,9 @@ import moment from 'moment/moment';
 
 import style from './TaskItem.module.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faTrash, faChevronLeft} from '@fortawesome/free-solid-svg-icons'
-import TaskContext from '../Layout/Context/TaskContext';
+import TaskOptions from './TaskOptions';
 
 const TaskItem = props => {
-
-  const taskCtx = useContext(TaskContext)
-
-  const [optionState, toggleOption] = useState(false);
-  const [listOptionState, toggleListOption] = useState(false);
 
   let formattedDue = '';
   const isOverdue = moment(props.due).isBefore(moment(), 'day');
@@ -26,15 +19,6 @@ const TaskItem = props => {
     if(moment(props.due).isSame(moment(), 'day')) {
       formattedDue = moment(props.due).format('[Today]');
     }
-  }
-
-  const optionButtonClickHandler = () => {
-    console.log(`Options clicked. Task: ${props.id}, ${props.task}`)
-    toggleOption(!optionState)
-  }
-
-  const deleteTaskHandler = () => {
-    taskCtx.deleteTask(props.id);
   }
 
   return (
@@ -60,49 +44,12 @@ const TaskItem = props => {
         <br />
         <span>{`# ${props.list}`}</span>
       </div>
-      <div className={style["task-item__options-wrapper"]}>
-        <button
-          type="button"
-          onClick={optionButtonClickHandler}
-          className={style.optionsBtn}
-        >
-          <FontAwesomeIcon icon={faEllipsis} />
-        </button>
-        <div
-          className={style["options"]}
-          onMouseLeave={() => {
-            toggleOption(!optionState);
-            toggleListOption(false);
-          }}
-          style={{ display: optionState ? "block" : "none" }}
-        >
-          <div className={style["list-option"]} onClick={() => {toggleListOption(!listOptionState)}}>
-            <span className={style.addToListOpt}>
-              <FontAwesomeIcon icon={faChevronLeft} className={style.faIcon} />Add to list
-            </span>
-            <ul className={style["list"]} onMouseLeave={() => {toggleListOption(!listOptionState)}} style={{display: listOptionState ? "block" : "none"}}>
-              {taskCtx.lists.map((item) => (
-                <li key={item.id} id={item.id} onClick={() => {taskCtx.changeList(props.id, item.list, props.list)
-                console.log(props.list);
-                }}>
-                  {`#${item.list}`}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button
-            type="button"
-            className={style.deleteBtn}
-            onClick={deleteTaskHandler}
-          >
-            <FontAwesomeIcon icon={faTrash} className={style.faIcon} /> Delete
-            Task
-          </button>
-        </div>
-      </div>
+      {!props.isDone && <TaskOptions id={props.id} list={props.list} />}
     </li>
   );
 
 };
 
-export default TaskItem;
+
+    
+    export default TaskItem;
