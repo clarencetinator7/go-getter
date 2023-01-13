@@ -46,14 +46,26 @@ const INITIAL_TASKS = [
 ];
 
 const INITIAL_LIST = [
-  'Chores',
-  'Self-care',
-  'Work',
+  {
+    id: 1,
+    list: "Chores",
+    tasksCount: 1
+  },
+  {
+    id: 2,
+    list: "Self-care",
+    tasksCount: 2
+  },
+  {
+    id: 3,
+    list: "Work",
+    tasksCount: 1
+  },
 ]
 
 const defaultTaskState = {
   tasks: INITIAL_TASKS,
-  lists: INITIAL_LIST
+  lists: INITIAL_LIST,
 }
 
 const taskReducer = (state, action) => {
@@ -91,7 +103,14 @@ const taskReducer = (state, action) => {
       }
     }
     case "ADD_LIST": {
-      const updatedList = state.lists.concat(action.newList);
+      const updatedList = [...state.lists, action.newList];
+      return {
+        ...state,
+        lists: updatedList
+      }
+    }
+    case "DELETE_LIST": {
+      const updatedList = state.lists.filter(list => action.listId !== list.id);
       return {
         ...state,
         lists: updatedList
@@ -129,20 +148,23 @@ const TaskProvider = props => {
     taskDispatchAction({type: 'TOGGLE_TASK', taskId: taskId})
   };
 
- function sortTasks(tasks) {
-    return tasks.sort((a, b) => {
-      if (a.due === null && b.due === null) {
-        return 0;
-      }
-      if (a.due === null) {
-        return -1;
-      }
-      if (b.due === null) {
-        return 1;
-      }
-      return new Date(a.due) - new Date(b.due);
-    });
-  } 
+  //function that sorts tasks by due date
+  // the overdue tasks are sorted to the top of the list
+  // the tasks with no due are next on the list
+  // the tasks with due dates are sorted by due date
+  const sortTasks = (tasks) => {
+    const overdueTasks = tasks.filter(
+      (task) => task.due !== null && moment(task.due).isBefore(moment(), "day")
+    );
+    const noDueTasks = tasks.filter((task) => task.due === null);
+    const sortedTasks = tasks
+      .filter(
+        (task) =>
+          task.due !== null && moment(task.due).isSameOrAfter(moment(), "day")
+      )
+      .sort((a, b) => new Date(a.due) - new Date(b.due));
+    return [...overdueTasks, ...noDueTasks, ...sortedTasks];
+  };
 
   const sortTaskHandler = () => {
     const sortedTask = sortTasks(taskState.tasks);
@@ -157,6 +179,10 @@ const TaskProvider = props => {
     taskDispatchAction({type: 'CHANGE_LIST', newList: list, taskId: taskId})
   }
 
+  const deleterListHandler = (listId) => {
+    taskDispatchAction({type: 'DELETE_LIST', listId: listId})
+  }
+
   const taskContext = {
     tasks: taskState.tasks,
     lists: taskState.lists,
@@ -166,6 +192,7 @@ const TaskProvider = props => {
     getSortedTasks: sortTaskHandler, 
     addList: addListHandler,
     changeList: changeListHandler,
+    deleterList: deleterListHandler,
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;

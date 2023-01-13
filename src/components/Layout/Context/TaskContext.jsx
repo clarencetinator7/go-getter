@@ -8,7 +8,8 @@ const TaskContext = React.createContext({
   toggleTask: (taskId) => {},
   getSortedTasks: () => {},
   addList: (list) => {},
-  changeList: (id, list) => {}
+  changeList: (id, list) => {},
+  deleteList: (listId) => {}
 });
 
 export default TaskContext;

@@ -40,21 +40,24 @@ const ListFilter = (props) => {
       return;
     }
 
-    taskCtx.addList(enteredList)
+    taskCtx.addList({
+      id: Math.random().toString(),
+      list: enteredList,
+    })
     setEnteredList('');
   }
 
   const displayList = taskCtx.lists.map((item) => {
     return (
       <li
-        key={item}
-        id={item}
+        key={item.id}
+        id={item.id}
         className={style["list-item"]}
         onClick={(e) => {
-          props.setDisplay(e.target.id);
+          props.setDisplay(item.list);
         }}
       >
-        {`# ${item}`}
+        {`# ${item.list}`}
       </li>
     );
   });
