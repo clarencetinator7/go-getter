@@ -69,6 +69,15 @@ const defaultTaskState = {
 }
 
 const taskReducer = (state, action) => {
+
+  // this function updates the task count for a specific list  
+  const updateTaskCount = (listName, updatedTasks) => {
+    // count the number of tasks that are not done and same 'listName'
+    const taskCount = updatedTasks.filter(task => task.list === listName && !task.isDone).length;
+    // updates the list with the new task count
+    return state.lists.map(list => list.list === listName ? {...list, tasksCount: taskCount} : list);
+  }
+
   switch (action.type) {
     case "ADD_TASK": {
       // it creates a new array with the existing tasks and the new task
@@ -93,10 +102,8 @@ const taskReducer = (state, action) => {
 
       // finds the list name of the deleted task
       const listName = state.tasks.find(task => task.id === action.taskId).list;
-      // counts the number of tasks with the similar 'listName' and tasks thate aren't done
-      const taskCount = updatedTasks.filter(task => task.list === listName && !task.isDone).length;
-      // updates the list with the new task count
-      const updatedLists = state.lists.map(list => list.list === listName ? {...list, tasksCount: taskCount} : list);
+      // 'updateTaskCount' function returns object with the updated task count
+      const updatedLists = updateTaskCount(listName, updatedTasks);
 
       return {
         lists: updatedLists,
@@ -104,11 +111,10 @@ const taskReducer = (state, action) => {
       }
     }
     case "TOGGLE_TASK": {
-      // let updatedLists = {};
-
+      
       /* THIS IS MY FIRST SOLUTION IN COUNTING AND UPDATING THE TASK */
       /* DONT REMOVE FOR EDUCTATIONAL PURPOSES */
-
+      // let updatedLists = {};
       // const updatedTasks = state.tasks.map((task) => {
       //   if (task.id === action.taskId) {
       //     const taskUpdate =  {
@@ -144,6 +150,7 @@ const taskReducer = (state, action) => {
       // it creates a new array with the existing tasks
       // it maps through the tasks array and if the task id matches the taskId
       // it modifies the task object with the new 'isDone' value based on the reverse of the current value
+      
       const updatedTasks = state.tasks.map((task) =>
         task.id === action.taskId
           ? {
@@ -156,10 +163,8 @@ const taskReducer = (state, action) => {
 
       // Get the list name of the updated task from 'updatedTasks' arr
       const listName = updatedTasks.find(task => task.id === action.taskId).list;
-      // Count the finished task with the same listName
-      const tasksCount = updatedTasks.filter(task => task.list === listName && !task.isDone).length;
-      // Update the taskCount of the list
-      const updatedLists = state.lists.map(item => item.list === listName ? {...item, tasksCount: tasksCount} : item);
+      // 'updateTaskCount' function returns object with the updated task count
+      const updatedLists = updateTaskCount(listName, updatedTasks);
 
       return {
         tasks: updatedTasks,

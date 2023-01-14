@@ -26,7 +26,6 @@ const TaskOptions = (props) => {
   const [listOptionState, toggleListOption] = useState(false);
 
   const optionButtonClickHandler = () => {
-    console.log(`Options clicked. Task: ${props.id}, ${props.task}`);
     toggleOption(!optionState);
   };
 
@@ -41,7 +40,6 @@ const TaskOptions = (props) => {
 
   const changeListHandler = (newList) => {
     taskCtx.changeList(props.id, newList, props.list);
-    console.log(props.list);
   };
 
   const listContent = taskCtx.lists.map((item) => (
