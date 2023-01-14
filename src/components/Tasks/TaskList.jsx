@@ -41,11 +41,9 @@ const TaskList = (props) => {
    
 
   return (
-    <div className={style['task-list__container']}>
       <ul className={style['task-list']}>
         {onGoingTaskItems}
       </ul>
-    </div>
   );  
 
 }

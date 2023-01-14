@@ -20,7 +20,7 @@ const Sidebar = (props) => {
   
 
   return (
-    <nav className={style.sidebar}>
+    <nav className={`${style.sidebar} ${props.sidebarOpen && style.active}`}>
       <div className={style["sidebar__logo-container"]}>
         <span>GO-GETTER</span>
       </div>

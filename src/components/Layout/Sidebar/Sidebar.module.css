@@ -46,3 +46,28 @@
   padding-right: 9px;
 }
 
+@keyframes sidebar-anim {
+  0% {
+    left: -250px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 10;
+    left: -250px;
+    margin-top: 50px;
+    padding-top: 50px;
+  }
+  .sidebar.active {
+    animation: sidebar-anim 200ms ease forwards;
+  }
+
+  .sidebar__logo-container {
+    display: none;
+  }
+}
