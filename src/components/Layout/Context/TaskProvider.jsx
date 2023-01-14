@@ -59,7 +59,7 @@ const INITIAL_LIST = [
   {
     id: 3,
     list: "Work",
-    tasksCount: 1
+    tasksCount: 0
   },
 ]
 
@@ -75,8 +75,9 @@ const taskReducer = (state, action) => {
       // it then returns a new state object with the updated tasks
       const updatedTasks = [...state.tasks, action.newTask];
 
+      // get the 'listName' from the new task      
       const listName = action.newTask.list;
-
+      // updates the list with the new task count
       const updatedLists = state.lists.map(list => list.list === listName ? {...list, tasksCount: list.tasksCount + 1} : list);
 
       return {
@@ -88,10 +89,18 @@ const taskReducer = (state, action) => {
       // it creates a new array with the existing tasks
       // except the one with the it that matches the taskId
       // it then returns a new state object with the updated tasks
-      const updatedTask = state.tasks.filter(task => action.taskId !== task.id);
+      const updatedTasks = state.tasks.filter(task => action.taskId !== task.id);
+
+      // finds the list name of the deleted task
+      const listName = state.tasks.find(task => task.id === action.taskId).list;
+      // counts the number of tasks with the similar 'listName' and tasks thate aren't done
+      const taskCount = updatedTasks.filter(task => task.list === listName && !task.isDone).length;
+      // updates the list with the new task count
+      const updatedLists = state.lists.map(list => list.list === listName ? {...list, tasksCount: taskCount} : list);
+
       return {
-        ...state,
-        tasks: updatedTask
+        lists: updatedLists,
+        tasks: updatedTasks
       }
     }
     case "TOGGLE_TASK": {
