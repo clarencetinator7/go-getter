@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import moment from 'moment/moment';
 
 import style from './TaskItem.module.css';

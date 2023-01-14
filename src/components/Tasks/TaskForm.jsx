@@ -1,4 +1,4 @@
-import moment, { isMoment } from 'moment/moment';
+import moment from 'moment/moment';
 import React, { useContext, useState } from 'react';
 import TaskContext from '../Layout/Context/TaskContext';
 
