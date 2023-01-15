@@ -15,7 +15,7 @@
   /* display: none; */
   position: absolute;
   z-index: 5;
-  bottom: -110px;
+  bottom: -145px;
   right: 0;
   width: 180px;
   border: solid 1px #ccc;
@@ -91,3 +91,31 @@
 .list-option .list li:hover {
   background-color: rgb(241, 241, 241);
 }
+
+.datePicker-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0em .5em 0em 1.7em;
+}
+
+.datePicker-wrapper:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+.datePicker-wrapper .faIcon {
+  flex-grow: auto;
+  font-size: 1.6em;
+  margin-right: .7em;
+}
+
+.datePicker {
+  width: 100%;
+  border: none;
+  font-size: 1.4em;
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-text-color);
+  background-color: transparent;
+  padding: .9em 0;
+}
+

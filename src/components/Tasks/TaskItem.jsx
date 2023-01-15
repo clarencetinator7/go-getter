@@ -44,7 +44,7 @@ const TaskItem = props => {
         <br />
         <span>{`# ${props.list}`}</span>
       </div>
-      {!props.isDone && <TaskOptions id={props.id} list={props.list} task={props.task} />}
+      {!props.isDone && <TaskOptions id={props.id} list={props.list} task={props.task} due={props.due}/>}
     </li>
   );
 

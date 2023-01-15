@@ -14,7 +14,7 @@ const faIcons = {
 
 function App() {
   
-  const [currDisplayed, setDisplayed] = useState('INBOX');
+  const [currDisplayed, setDisplayed] = useState('TODAY');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const setDisplayedHandler = (display) => {

@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
+import Flatpickr from "react-flatpickr";
 
+import "flatpickr/dist/themes/material_green.css";
 import style from "./TaskOptions.module.css";
 
 import TaskContext from "../Layout/Context/TaskContext";
@@ -9,7 +11,9 @@ import {
   faEllipsis,
   faTrash,
   faChevronLeft,
+  faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 const faIcon = {
   chevronLeft: (
@@ -17,6 +21,7 @@ const faIcon = {
   ),
   trash: <FontAwesomeIcon icon={faTrash} className={style.faIcon} />,
   ellipsis: <FontAwesomeIcon icon={faEllipsis} className={style.faIcon} />,
+  calendarPlus: <FontAwesomeIcon icon={faCalendarPlus} className={style.faIcon} />,
 };
 
 const TaskOptions = (props) => {
@@ -52,6 +57,9 @@ const TaskOptions = (props) => {
     </li>
   ));
 
+  // const dateValue = props.due ? moment(props.due).format("YYYY-MM-DD") : moment().format("YYYY-MM-DD");
+  // console.log(dateValue);
+
 
   return (
     <div className={style["task-item__options-wrapper"]}>
@@ -69,6 +77,22 @@ const TaskOptions = (props) => {
           display: optionState ? "block" : "none",
         }}
       >
+        <div className={style["datePicker-wrapper"]}>
+          {faIcon.calendarPlus}
+          <Flatpickr
+            className={style.datePicker}
+            options={{
+              defaultDate: props.due,
+              disableMobile: true,
+              minDate: "today",
+              maxDate: new Date().fp_incr(365),
+              // dateFormat: "M-d",
+            }}
+            // {...moment(props.due).isBefore(moment(), 'day') && {placeholder: "Re-schedule"}}
+            placeholder={moment(props.due).isBefore(moment(), 'day') ? "Re-schedule" : "Add due date"}
+            
+          />
+        </div>
         <div
           className={style["list-option"]}
           onClick={() => {
@@ -91,6 +115,7 @@ const TaskOptions = (props) => {
             {listContent}
           </ul>
         </div>
+        
         <button
           type="button"
           className={style.deleteBtn}
