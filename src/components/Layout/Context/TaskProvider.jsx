@@ -229,9 +229,9 @@ const taskReducer = (state, action) => {
       }
     }
     case "EDIT_DATE": {
+      
       const updatedTasks = state.tasks.map((task) => task.id === action.taskId ? { ...task, due: action.newDate } : task);
-      console.log(`EDIT_DATE: ${action.newDate} ${action.taskId}`);
-      console.log(updatedTasks);
+      
       return {
         ...state,
         tasks: updatedTasks,

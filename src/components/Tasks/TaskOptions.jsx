@@ -31,13 +31,11 @@ const TaskOptions = (props) => {
 
   const [optionState, toggleOption] = useState(false);
   const [listOptionState, toggleListOption] = useState(false);
-  // const [dateState, editDate] = useState(props.due);
 
   const onChangeHandler = () => {
     const formattedNewDate = moment(datePicker.current.flatpickr.selectedDates[0]).format("YYYY-MM-DD");
     taskCtx.editDate(props.id, formattedNewDate);
-    console.log("TRIGGERED ONCHANGEHANDLER");
-    
+
   };
 
   const optionButtonClickHandler = () => {
