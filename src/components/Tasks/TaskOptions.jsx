@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import Flatpickr from "react-flatpickr";
 
 import "flatpickr/dist/themes/material_green.css";
@@ -27,8 +27,16 @@ const faIcon = {
 const TaskOptions = (props) => {
   const taskCtx = useContext(TaskContext);
 
+  const datePicker = useRef();  
+
   const [optionState, toggleOption] = useState(false);
   const [listOptionState, toggleListOption] = useState(false);
+  // const [dateState, editDate] = useState(props.due);
+
+  const onChangeHandler = () => {
+    const formattedNewDate = moment(datePicker.current.flatpickr.selectedDates[0]).format("YYYY-MM-DD");
+    
+  }
 
   const optionButtonClickHandler = () => {
     toggleOption(!optionState);
@@ -80,6 +88,7 @@ const TaskOptions = (props) => {
         <div className={style["datePicker-wrapper"]}>
           {faIcon.calendarPlus}
           <Flatpickr
+            ref={datePicker}
             className={style.datePicker}
             options={{
               defaultDate: props.due,
@@ -90,6 +99,7 @@ const TaskOptions = (props) => {
             }}
             // {...moment(props.due).isBefore(moment(), 'day') && {placeholder: "Re-schedule"}}
             placeholder={moment(props.due).isBefore(moment(), 'day') ? "Re-schedule" : "Add due date"}
+            onChange={onChangeHandler}
             
           />
         </div>
