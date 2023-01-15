@@ -228,6 +228,15 @@ const taskReducer = (state, action) => {
         lists: updatedLists
       }
     }
+    case "EDIT_DATE": {
+      const updatedTasks = state.tasks.map((task) => task.id === action.taskId ? { ...task, due: action.newDate } : task);
+      console.log(`EDIT_DATE: ${action.newDate} ${action.taskId}`);
+      console.log(updatedTasks);
+      return {
+        ...state,
+        tasks: updatedTasks,
+      }
+    }
     default:
       console.log(`default`);
       return state;
@@ -293,6 +302,11 @@ const TaskProvider = props => {
   const deleterListHandler = (listId) => {
     taskDispatchAction({type: 'DELETE_LIST', listId: listId})
   }
+
+  const editDateHandler = (taskId, newDate) => {
+    taskDispatchAction({type: 'EDIT_DATE', taskId: taskId, newDate: newDate})
+  };
+
   
   const taskContext = {
     tasks: taskState.tasks,
@@ -304,6 +318,7 @@ const TaskProvider = props => {
     addList: addListHandler,
     changeList: changeListHandler,
     deleteList: deleterListHandler,
+    editDate: editDateHandler,
   }
 
   return <TaskContext.Provider value={taskContext}>{props.children}</TaskContext.Provider>;

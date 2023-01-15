@@ -9,7 +9,8 @@ const TaskContext = React.createContext({
   getTasks: {},
   addList: (list) => {},
   changeList: (id, list) => {},
-  deleteList: (listId) => {}
+  deleteList: (listId) => {},
+  editDate: (taskId, newDate) => {},
 });
 
 export default TaskContext;
