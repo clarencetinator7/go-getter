@@ -117,7 +117,6 @@ const ListFilter = (props) => {
           />
         </form>
           {isListExists && <p className={style["error-text"]}>List already exists</p>}
-
       </ul>
     </div>
   );
