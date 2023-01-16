@@ -41,7 +41,7 @@ const TaskPanel = (props) => {
     },
     NEXTWEEK: {
       name: "📅 Next Week",
-      filterFn: (item) => moment(item.due).isAfter(moment(), "week") && !item.isDone,
+      filterFn: (item) => moment(item.due).isAfter(moment(), "day") && !item.isDone,
       filterDn: (item) => item.isDone,
       isList: false,
       emptyMessage: {
